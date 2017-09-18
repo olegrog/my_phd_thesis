@@ -57,27 +57,27 @@
 }
 
 \precaption{\tabcapalign} % всегда идет перед подписью или \legend
-\captionnamefont{\normalfont\normalsize} % Шрифт надписи «Таблица #»; также определяет шрифт у \legend
+%\captionnamefont{\normalfont\normalsize} % Шрифт надписи «Таблица #»; также определяет шрифт у \legend
 \captiondelim{\tablabelsep} % разделитель идентификатора с номером от наименования
 \captionstyle[\tabtitalign]{\tabtitalign}
-\captiontitlefont{\normalfont\normalsize} % Шрифт с текстом подписи
+%\captiontitlefont{\normalfont\normalsize} % Шрифт с текстом подписи
 
 %%% Рисунки %%%
 \setfloatadjustment{figure}{%
     \setlength{\abovecaptionskip}{0pt}   % Отбивка над подписью
-    \setlength{\belowcaptionskip}{0pt}   % Отбивка под подписью
+    \setlength{\belowcaptionskip}{5pt}   % Отбивка под подписью
     \precaption{} % всегда идет перед подписью или \legend
-    \captionnamefont{\normalfont\normalsize} % Шрифт надписи «Рисунок #»; также определяет шрифт у \legend
+    \captionnamefont{\normalfont\footnotesize} % Шрифт надписи «Рисунок #»; также определяет шрифт у \legend
     \captiondelim{\figlabelsep} % разделитель идентификатора с номером от наименования
     \captionstyle[\centering]{\centering} % Центрирование подписей, заданных командой \caption и \legend
-    \captiontitlefont{\normalfont\normalsize} % Шрифт с текстом подписи
+    \captiontitlefont{\normalfont\footnotesize} % Шрифт с текстом подписи
     \postcaption{} % всегда идет после подписи или \legend, и с новой строки
 }
 
 %%% Подписи подрисунков %%%
 \newsubfloat{figure} % Включает возможность использовать подрисунки у окружений figure
 \renewcommand{\thesubfigure}{\asbuk{subfigure}}           % Буквенные номера подрисунков
-\subcaptionsize{\normalsize} % Шрифт подписи названий подрисунков (не отличается от основного)
+%\subcaptionsize{\normalsize} % Шрифт подписи названий подрисунков (не отличается от основного)
 \subcaptionlabelfont{\normalfont}
 \subcaptionfont{\!\!) \normalfont} % Вот так тут добавили скобку после буквы.
 \subcaptionstyle{\centering}
