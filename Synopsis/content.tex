@@ -307,7 +307,7 @@
     \pder[f]{\zeta_i}n_i = C\ln\zeta_in_i + \OO{1}, \quad (\zeta_in_i<0).
 \end{equation*}
 Погрешность решения на равномерной сетке при том же количестве узлов
-разрастается при увеличении числа Кнудсена (положение~\ref{defpos:uniform_grid}).
+разрастается при увеличении числа Кнудсена.
 Во-вторых, для малых чисел Кнудсена требуется измельчение физической сетки вблизи пластин, поскольку
 \begin{equation*}
     \pder[f]{x_i}n_i = \frac{C}{\Kn}\ln\frac{(x_i-x_{Bi})n_i}{\Kn} + \OO{1},
@@ -327,15 +327,24 @@
 \end{figure}
 
 \begin{figure}
+    \scalebox{0}{
+        \begin{tikzpicture}
+            \begin{axis}[hide axis, xmin=0, xmax=1, ymin=0, ymax=1] % to prevent warnings
+                \addplot[color=-red]              (0,0); \label{leg:bgk}
+                \addplot[color=black, mark=star9] (0,0); \label{leg:lbe}
+                \addplot[color=red,   mark=o]     (0,0); \label{leg:kes}
+                \addplot[color=green, mark=square](0,0); \label{leg:dsmc}
+                \addplot[color=blue]              (0,0); \label{leg:asym}
+            \end{axis}
+        \end{tikzpicture}
+    }%
     \centering
     \includegraphics{couette/integrated/shear}
-    \caption{Зависимость сдвигового напряжения от числа Кнудсена. \(k=\Kn\sqrt\pi/2\),
-        а \(P_{\NS xy}^*\) соответствует решению уравнений Навье"--~Стокса с граничными условиями без скольжения.
-        Показаны решения
-        модельного уравнения Крука"--~Веландера (BKW),
-        линеаризованного уравнения Больцмана (Sone et al.),
-        ПМДС (projection method), ПСМ (DSMC) и
-        асимптотическое решение (asymptotic).}
+    \caption{Зависимость сдвигового напряжения от числа Кнудсена. \(k=\Kn\sqrt\pi/2\), а \(P_{\NS xy}^*\)
+        соответствует решению уравнений Навье"--~Стокса с граничными условиями без скольжения.
+        Показаны решения модельного уравнения Крука"--~Веландера~\ref{leg:bgk},
+        линеаризованного уравнения Больцмана~\ref{leg:lbe},
+        ПМДС~\ref{leg:kes}, ПСМ~\ref{leg:dsmc} и асимптотическое решение~\ref{leg:asym}.}
     \label{fig:couette:shear}
 \end{figure}
 
@@ -377,13 +386,13 @@
     \scalebox{0}{
         \begin{tikzpicture}
             \begin{axis}[hide axis, xmin=0, xmax=1, ymin=0, ymax=1] % to prevent warnings
-                \addplot[line width=0.8, dotted](0,0);                      \label{leg:heat}
-                \addplot[line width=0.8, dashed](0,0);                      \label{leg:asym0}
-                \addplot[line width=0.8, dashdotted](0,0);                  \label{leg:asym1}
-                \addplot[line width=0.8, solid](0,0);                       \label{leg:asym2}
-                \addplot[line width=0.8, only marks, mark=o](0,0);          \label{leg:data1}
-                \addplot[line width=0.8, only marks, mark=square](0,0);     \label{leg:data2}
-                \addplot[line width=0.8, only marks, mark=triangle](0,0);   \label{leg:data3}
+                \addplot[color=gnuplot6, dotted](0,0);                      \label{leg:heat}
+                \addplot[color=gnuplot1, dashed](0,0);                      \label{leg:asym0}
+                \addplot[color=gnuplot2, dashdotted](0,0);                  \label{leg:asym1}
+                \addplot[color=gnuplot4, solid](0,0);                       \label{leg:asym2}
+                \addplot[color=gnuplot7, only marks, mark=o](0,0);          \label{leg:data1}
+                \addplot[color=gnuplot7, only marks, mark=square](0,0);     \label{leg:data2}
+                \addplot[color=gnuplot7, only marks, mark=triangle](0,0);   \label{leg:data3}
             \end{axis}
         \end{tikzpicture}
     }%
@@ -400,8 +409,7 @@
         уравнение теплопроводности~\ref{leg:heat},
         уравнения КГФ с граничными условиями ведущего порядка (только тепловое скольжение)~\ref{leg:asym0},
         первого~\ref{leg:asym1} и второго~\ref{leg:asym2} порядков,
-        уравнение Больцмана на равномерной сетке~\ref{leg:data1} и неравномерных сетках~\ref{leg:data2} и~\ref{leg:data3}.
-        Нижняя планка у~\ref{leg:data3} соответствует скорректированому значению температурного поля.
+        уравнение Больцмана на равномерной сетке~\ref{leg:data1} и неравномерной~\ref{leg:data2}.
         Планка у~\ref{leg:data1} соответствует абсолютной погрешности \(3\cdot10^{-4}\) поля скорости.
     }
     \label{fig:sone_bobylev:comparison}
@@ -414,9 +422,6 @@
 На рис.~\ref{fig:sone_bobylev:comparison} видно, что такой результат достигнут, главным образом,
 благодаря граничным условиям, учитывающим тепловое скольжение, скачки скорости и температуры первого порядка.
 Сравниваются решения ПМДС, полученные на различных скоростных сетках.
-Для представленного диапазона температур приемлимая точность ПМДС легко достигается
-на равномерной сетке (положение~\ref{defpos:uniform_grid}), в то время как для неравномерной сетки
-возникает проблема точности вычисления макроскопических величин.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -503,11 +508,10 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\underline{\textbf{Приложение}} состоит из двух частей.
-Первая часть содержит вывод одномерных интегральных уравнений Фредгольма из линеаризованного уравнения Больцмана
+\underline{\textbf{Приложение}} состоит из одной части.
+Она содержит вывод одномерных интегральных уравнений Фредгольма из линеаризованного уравнения Больцмана
 для газа твёрдых сфер, необходимых для вычисления транспортных коэффициентов \(\Gamma_8\), \(\Gamma_9\), \(\Gamma_{10}\)
 (положение~\ref{defpos:transport_coeffs}).
-Вторая часть описывает алгоритм многомерного интегрирования по правилам Коробова.
 
 В \underline{\textbf{заключении}} приведены основные выводы и рекомендации:
 \input{common/concl}
