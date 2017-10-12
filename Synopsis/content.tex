@@ -53,7 +53,7 @@
 непосредственно применяемые для задач, рассмотренных в настоящем исследовании
 (положение \ref{defpos:asymptotic_verification}).
 
-Во-первых, это одномерные \emph{плоско-параллельные течения} при конечных числах Маха.
+Во-первых, это одномерные \emph{плоскопараллельные течения} при конечных числах Маха.
 Вплоть до членов второго порядка они описываются уравнениями Навье"--~Стокса
 \begin{equation*}
     \der{y}\left(\Gamma_1\der[v_H]{y}\right) = \OO{k^2}, \quad
@@ -225,31 +225,31 @@
 обеспечивающее \(\hat{f}_\gamma^{n+j/N}>0\) (положение~\ref{defpos:stencils}).
 Если все проекционные веса \(r_{\lambda_\nu,a}\) положительны, то достаточно
 \begin{equation*}
-    N > A \hat{f}_{\max} \varepsilon_f^2 \varepsilon_w^2,
+    N > A \hat{f}_{\max} \epsilon_f^2 \epsilon_w^2,
 \end{equation*}
 где
 \begin{gather*}
     A = \frac{\pi\tau V_\Gamma^2 N B_{\max}}{\sum_{\nu\in\Nu} w_{\alpha_\nu}w_{\beta_\nu}}, \quad
-    B_{\max} = \max_{\substack{\gamma,\varsigma\in\Gamma\\\boldsymbol{\alpha}\in S^2}}
-        B(\boldsymbol{\alpha}, \bzeta_{\gamma}, \bzeta_{\varsigma}) = \OO{\zeta_{\max}}, \quad
+    B_{\max} = \max_{\substack{\gamma,\sigma\in\Gamma\\\boldsymbol{\alpha}\in S^2}}
+        B(\boldsymbol{\alpha}, \bzeta_{\gamma}, \bzeta_{\sigma}) = \OO{\zeta_{\max}}, \quad
     \zeta_{\max} = \max_{\gamma\in\Gamma}|\bzeta_\gamma|, \\
     \hat{f}_{\max} = \max_{\gamma\in\Gamma} \hat{f}_\gamma, \quad
-    \varepsilon_f = \max_{\substack{s_a,s_b\in\mathcal{S}\\\gamma\in\Gamma}} \frac{\hat{f}_{\gamma+s_a}}{\hat{f}_{\gamma+s_b}}, \quad
-    \varepsilon_w = \max_{\gamma,\varsigma\in\Gamma} \frac{w_\gamma}{w_\varsigma}.
+    \epsilon_f = \max_{\substack{s_a,s_b\in\mathcal{S}\\\gamma\in\Gamma}} \frac{\hat{f}_{\gamma+s_a}}{\hat{f}_{\gamma+s_b}}, \quad
+    \epsilon_w = \max_{\gamma,\sigma\in\Gamma} \frac{w_\gamma}{w_\sigma}.
 \end{gather*}
 Если же проекционные веса принимают отрицательные значения, то оценка значительно ухудшается:
 \begin{equation*}
-    N > A \hat{f}_{\max} \bar{r}_{\max} \max_{\gamma,\varsigma\in\Gamma}\frac{\hat{f_\gamma}}{\hat{f_\varsigma}}, \quad
+    N > A \hat{f}_{\max} \bar{r}_{\max} \max_{\gamma,\sigma\in\Gamma}\frac{\hat{f_\gamma}}{\hat{f_\sigma}}, \quad
     \bar{r}_{\max} = \max_{\gamma\in\Gamma,a\in\Lambda}( -r_{\gamma,a} ).
 \end{equation*}
-Величина \(\varepsilon_f\) уменьшается при измельчении сетки в областях с высоким градиентом
+Величина \(\epsilon_f\) уменьшается при измельчении сетки в областях с высоким градиентом
 и при уменьшении диаметра проекционного шаблона
 \begin{equation*}
     R_\mathcal{S} = \max_{\substack{s_a,s_b\in\mathcal{S}\\\gamma\in\Gamma}}
         \left| \bzeta_{\gamma+s_a} - \bzeta_{\gamma+s_b} \right|.
 \end{equation*}
 Таким образом, чтобы смягчить оценку на \(N\),
-необходимо уменьшать \(|\Gamma|\), \(\zeta_{\max}\), \(\varepsilon_w\) скоростной сетки
+необходимо уменьшать \(|\Gamma|\), \(\zeta_{\max}\), \(\epsilon_w\) скоростной сетки
 и \(R_\mathcal{S}\), \(\bar{r}_{\max}\) проекционного шаблона.
 На равномерной сетке консервативность может быть достигнута с помощью двухточечного шаблона с \(\bar{r}_{\max}=0\);
 для пяти- и семиточечной схем \(\bar{r}_{\max}=1/8\).
@@ -257,7 +257,7 @@
 %%% Exclusion of cubature points
 Из приведённых оценок видно, что сохранение положительности для всех дробных шагов
 приводит в общем случае к огромным \(N\), поэтому в настоящем исследовании
-используется альтернативная форма столкновительного интеграла
+используется схема с фильтрацией кубатурного множества:
 \begin{equation*}
     \hat{J}_\gamma = \sum_{\nu\in\Nu\setminus\Mu} \hat{\Delta}_{\gamma\nu},
 \end{equation*}
@@ -446,7 +446,7 @@
         \includegraphics[width=\textwidth]{kgf/force/terms-cylinder-inner}
         \caption{Профили компонент действующей силы \(F_{x2}\) вдоль поверхности внутреннего цилиндра
             в полярных координатах при \(d=0.5\) и \(\tau=4\).
-            \(\varphi = -\pi/2\) соответствует точке~\(x=d-1\), \(\varphi = \pi/2\) соответствует точке~\(x=d+1\).}
+            \(\phi = -\pi/2\) соответствует точке~\(x=d-1\), \(\phi = \pi/2\) соответствует точке~\(x=d+1\).}
         \label{fig:cylinders:terms_inner}
     \end{minipage}
 \end{figure}
