@@ -188,11 +188,11 @@
     \int\phi(\bzeta)J(f,g)\dzeta = \frac14\int(\phi+\phi_*-\phi'-\phi'_*) J(f,g)\dzeta.
 \end{equation}
 Поскольку \(\zeta_i+\zeta_{i*}=\zeta'_i+\zeta'_{i*}\) и \(\zeta_i^2+\zeta_{i*}^2={\zeta'_i}^2+{\zeta'_{i*}}^{\!\!2}\),
-то интеграл столкновений обладает несколькими инвариантами \(\psi_r\) (\(r=0, 1, 2, 3, 4\)):
+то интеграл столкновений обладает несколькими \emph{сумматорными инвариантами} \(\psi_r\) (\(r=0, 1, 2, 3, 4\)):
 \begin{equation}\label{eq:conser_moments}
     \int \psi_r J(f,g)\dzeta = 0,
 \end{equation}
-\begin{equation}\label{eq:def_psi}
+\begin{equation}\label{eq:summational_invariants}
     \psi_0 = 1, \quad \psi_i = \zeta_i, \quad \psi_4 = \zeta_i^2.
 \end{equation}
 Другими словами, в результате столкновений сохраняются масса, импульс и энергия.
@@ -262,7 +262,7 @@
 \end{equation}
 Возмущённое локальное максвелловское распределение
 \begin{equation}\label{eq:linear_maxwellian}
-    \phi_M = \omega + 2\zeta_i v_i + \left(\zeta_i^2-\frac32\right)\tau
+    \phi_M = \omega + 2\Z v_i + \left(\Z^2-\frac32\right)\tau
 \end{equation}
 удобно выражается через возмущённые макроскопические переменные:
 \begin{equation}\label{eq:linear_macro}
@@ -272,11 +272,11 @@
 \begin{gather}\label{eq:linear_macro_variables}
     \begin{gathered}
         \omega = \int \phi E\dzeta, \quad
-        v_i = \int \zeta_i \phi E\dzeta, \quad
-        \tau = \frac23 \int \left( \zeta_i-\frac32 \right)^2 \phi E\dzeta, \\
+        v_i = \int \Z \phi E\dzeta, \quad
+        \tau = \frac23 \int \left( \Z-\frac32 \right)^2 \phi E\dzeta, \\
         P = \tau + \omega, \quad
-        P_{ij} = 2\int \zeta_i\zeta_j\phi E\dzeta, \quad
-        q_i = \int \zeta_i\zeta_j^2\phi E\dzeta - \frac52v_i
+        P_{ij} = 2\int \ZZ \phi E\dzeta, \quad
+        Q_i = \int \ZZ^2 \phi E\dzeta - \frac52v_i
     \end{gathered}
 \end{gather}
 
@@ -330,7 +330,7 @@
 
 Для газа заключённого с физическую область \(\Omega\) граничные условия можно записать в достаточно общем виде
 \begin{equation}\label{eq:scatterring_kernel}
-    f(\bx,\bzeta,t) = \int_{(\zeta_{*i}-v_{Bi})n_i<0} \mathcal{R}(\bzeta,\bzeta_*,\bx,t)f(\bx,\bzeta_*,t)\dzeta_*
+    f_B(\bx,\bzeta,t) = \int_{(\zeta_{*i}-v_{Bi})n_i<0} \mathcal{R}(\bzeta,\bzeta_*,\bx,t)f(\bx,\bzeta_*,t)\dzeta_*
     \quad \left( x\in\partial\Omega, (\zeta_i-v_{Bi})n_i>0 \right),
 \end{equation}
 где \(n_i\) "--- единичная нормаль, направленная в сторону газа,
@@ -358,7 +358,7 @@
 соответствующие \(\alpha_\mathrm{M}=1\). Они линеаризуются следующим образом:
 \begin{equation}\label{eq:linear_diffuse_bc}
     \begin{gathered}
-        \phi(\bx, \bzeta) = \sigma_B + 2\zeta_j v_{Bj} + \left(\zeta_i-\frac32\right)^2\tau_B
+        \phi_B(\bx, \bzeta) = \sigma_B + 2\zeta_j v_{Bj} + \left(\zeta_i-\frac32\right)^2\tau_B
             \quad (\zeta_j-v_{Bj}) n_j > 0, \\
         \sigma_B = \sqrt\pi v_{Bj}n_j - \frac{\tau_B}2 -2\sqrt\pi
             \int_{(\zeta_j-v_{Bj})n_j < 0} \zeta_j n_j \phi E\dzeta.
@@ -453,7 +453,7 @@
 являются базовым инструментом в пространственно"=однородной теории
 и отражают поведение функции распределения для больших молекулярных скоростей.
 Равномерная ограниченность полиномиальных моментов позволяет сразу же доказать
-существование и единственность решения, а также \mathcal{H}-теорему Больцмана.
+существование и единственность решения, а также \(\mathcal{H}\)-теорему Больцмана.
 Первые такие результаты принадлежат Т.~Карлеману~\cite{Carleman1933} и А.\,Я.~Повзнеру~\cite{Povzner1962}
 для газа твёрдых сфер, Д.~Моргенштерну~\cite{Morgenstern1954} для макселловского газа.
 Общую \(L^1\)-теорию для класса жёстких короткодействующих потенциалов развил Л.~Аркерюд в 1971 году~\cite{Arkeryd1972}.
@@ -635,243 +635,364 @@
 М.~Гуалдани, С.~Мишлер и К.~Муо обобщили пространственно"=однородный результат Муо~\cite{Mouhot2006}
 и разработали абстрактный метод сочетания количественного спектрального анализа с энтропийными методами~\cite{Gualdani2013}.
 
+%%% функции Грина
+Ещё один важный результат был получен Т.-П.~Лю и Ш.-С.~Ю в рамках теории функции Грина~\cite{Liu2004green,Liu2006}.
+Они продемонстрировали, что затухание любого возмущения, описываемого линеаризованным уравнением Больцмана,
+может быть разложено на кинетическую составляющую, убывающую экспоненциально,
+и гидродинамическую, амплитуда которой спадает полиномиально в \(\mathbb{R}^3\).
+
 %\newpage
 %============================================================================================================================
 \section{Асимптотическая теория} \label{sect:asymptotic}
 
-\subsection{Строгие математические результаты}
-
-%%% строгая асимптотическая теория
-Строгая асимптотическая теория тесно связана с развитием математической теории самих гидродинамических уравнений.
-Существование слабых решений уравнений Навье"--~Стокса для несжимаемых течений было показано Ж.~Лер\'{е}~\cite{Leray1934}.
-Сходимость к ним ренормализованных решений ди-Перна"--~Лионса установлена в трудах
-К.~Бардоса, Ф.~Гольса, Д.~Левермора~\autocite{Bardos1993},
-П.-Л.~Лионса, Н.~Масмоуди~\autocite{Masmoudi2001} и Л.~Сен-Ремон~\autocite{Golse2004}.
-Строгая асимптотическая теория для сжимаемых течений далека от своей зрелости.
-Частичные результаты о сходимости к гладким решениям уравнений Эйлера принадлежат
-Т.~Нишиде~\autocite{Nishida1978} и Р.~Кафлишу~\autocite{Caflisch1980limit}.
-Больцмановская динамика процессов высокой частоты (сравнимой с частотой столкновений молекул)
-качественно отличается от классической гидродинамики на основе линейных законов Ньютона и Фурье.
-На основе множества работ И.\,В.~Карлина, А.\,Н.~Горбаня, М.~Слемрода совместно с другими авторами,
-можно сделать вывод, что в пределе малых чисел Кнудсена и конечных числах Маха корректные уравнения
-гидродинамического типа должны демонстрировать константную диссипацию высокочастотных мод
-и существенно нелокальный характер~\autocite{Gorban2014}.
-
-
-
-Р.~Кафлиш получил аналогичный результат, установив, что усечённое разложение Гильберта
-сходится к гладкому решению уравнений Эйлера~\cite{Caflisch1980limit}.
-% нет позитивности
-Т.~Нишида показал, что для любого гладкого решения уравнений Эйлера существует сходящаяся к нему
-последовательность решений уравнения Больцмана~\cite{Nishida1978}.
-%Nishida’s idea is to apply the Nirenberg-Ovsyannikov [61, 62] abstract variant of the Cauchy-Kovalevska theorem. упрощено Юкаем/Асано
-% initial layer due to Ukai and Asano1983
-%The only rigorous results have been proved by  and Ukai and Asano1983, then improved by Liu and Yu [79], [80]
-
-
-% golse acoustic small-amplitude limit
-
-one can say that any solution of Burnett equations (in particular, the constant equilibrium solution) is unstable with respect to short- wave perturbations (the instability paradox, in terminology of Jin-Slemrod [14]).
-
-dispersive dominance and saturation of dissipation rate of the exact hydrodynamics in the short-wave limit and the viscosity modifica- tion at high divergence of the flow velocity are indicated as severe obstacles to the resolution of Hilbert’s 6th Problem.
-
-Saturation of dissipation at high frequencies is a universal effect that does not appear in the classical hydrodynamic equations.
-Nevertheless, some effects persist: the saturation of dissipation for high frequencies and the nonlocal character of the hydrodynamic equations.
-
-Slemrod suggested that the proper exact hydrodynamic equation should have the form of the Korteweg hydrodynamics [32,99,133] rather than of Euler or Navier–Stokes ones.
-The capillarity-like terms appear, indeed, in the energy balance for all hydrody- namic equations found as a projection of the kinetic equations onto the exact or approximate invariant hydrodynamic manifolds.
-In the highly nonequilibrium gas, the capillarity energy becomes significant, and it tends to infinity for high-velocity gradients.
-
-together with the low-frequency, low-gradient Chapman–Enskog asymptotics the high–frequency and high–gradient asymptotics of the hydrodynamic equations are also achievable in a constructive simple form
-
-
-% Liu, Yu 2013: Ши-Сянь Ю, Тай-Пин Лю
-% The solutions of the nonlinear problem by Ukai et al. [38] are straightforward generalizations of the linear solutions, using an effective tool, "upwind damping", by the second author of the current paper. The analysis there is basically linear. This upwind damping tool is also one of the basic components for the construction of linear stable manifolds in this paper. In a study independent of the present one, Golse [11] recently succeeded in obtaining the first non-trivial nonlinear Knudsen-type layer solution for the problem at Mach number zero with a generalized penalized functional (generalized upwind damping) to screen out the fluid components.
-% The positivity of the weak Boltzmann shock profile was proved by Liu and Yu [20] using the time-asymptotic and energy methods. The original attempt in [20] was to make use of the monotonicity property. However, the authors soon realized that the monotonicity property was a highly non-trivial question which demanded an entirely new way of thinking, and so was left open. It eventually led to the present consideration of invariant manifolds. The monotonicity property is now established using the center manifold reduction.
-% Liu, Yu 2004pos: In [Caflisch, Nicolaenko1982] approach, the Boltzmann shock profiles are approximated by the Navier-Stokes shock profiles. The approach does not yield the positivity of the shocks due to the polynomial perturbation to the exponentially small Gaussian tail in the momentum variable \xi . Our idea is to show the positivity using the time-asymptotic stability analysis.
-% Yu2010: A Green’s function pointwise estimate approach was initiated in [13, 14] for the purpose of better understand- ing the qualitative and quantitative behaviors of perturbations of a viscous shock profile. We generalize and refine this approach here to have a better handling of the local wave interactions.
-
-% Filbet, Mouhot, Pareschi 2006: A recent work [Liu,Yu2004Green] gave a detailed pointwise study of the Green function for the linearized Boltzmann equation in the domain \(x\in\mathbb{r}\). In particular in this case, there study shows that the long-time behavior is governed by "fluid-like waves" (corresponding to the waves of the linearized Euler and Navier-Stokes equations) whose amplitude decreases polynomially, whereas the amplitude of the “kinetic part” of the Green function decreases exponentially. We think it likely that this study could be extended to the torus, where the amplitude of the fluid and kinetic parts of the Green function should both decrease exponentially. Moreover the rate of decay of the kinetic part should not depend on the size of the box, whereas the rate of decay of the fluid part should do. Hence for a box small enough, the long-time behavior should be governed by the kinetic part of the Green function (that is like the spatially homogeneous Boltzmann equation), whereas for a box big enough, the long-time behavior should be governed by the “fluid-like waves”. This is precisely what we observe numerically, and thus this theoretical study could provide a rigorous proof of the numerical observations above, at least in the linearized regime.
-
-% For the hard sphere potential, positivity of profiles, and the improved estimate (1.19) were shown by [Liu,Yu2004positivity] by a "macro-micro decomposition" method in which fluid (macroscopic, or equilib- rium) and transient (microscopic) effects are separated and estimated by different techniques. This was used in [Liu,Yu2004positivity] to establish time-evolution ary stability of profiles with respect to perturbations of zero fluid-dynamical mass, u(x)dx = 0, and thus, assuming the existence result of [Caflish,Nicolaenko], to establish positivity of Boltzmann profiles by the positive maximum principle for the Boltzmann equation (1.2) together with convergence to the Boltzmann profile of its own Maxwellian approximation: by definition, a perturbation of zero relative mass in fluid-dynamical variables.
-
-
-
-
-%%% краевая задача для линеаризованного уравнения Больцмана
-на основе линеаризованной теории, заложенной ещё Х.~Грэдом~\cite{Grad1963b}
-кинетического пограничного слоя, описывает
-течение газа над плоскостью под действием заданных нормальных потоков
-импульса и энергии.
-
-В частности, А.\,В.~Бобылев показал,
-что уравнения Барнетта, получаемые в третьем приближении, неустойчивы~\cite{Bobylev1982}.
-
-
-% Сложность численного анализа кнудсеновского слоя --- сингулярность вида \(\eta\log\eta\)~\cite{Chen2016}.
-
 %%% Гидродинамическое описание
-Состояние газа в уравнении Больцмана определяется функцией распределения \(f(x_i,\zeta_i)\).
+Состояние газа в уравнении Больцмана определяется функцией распределения \(f(\bx,\bzeta)\).
 Приняв, что число Кнудсена определённым образом стремится к нулю, можно перейти к менее детальному
 \emph{гидродинамическому описанию}, которое требует задания лишь первых пяти моментов от \(f\):
-плотности \(\rho(x_i)\), скорости \(v_i(x_i)\) и температуры \(T(x_i)\).
-В общем случае при таком асимптотическом переходе \(f(x_i,\zeta_i)\) является функционалом от
-\(\rho(x_i)\), \(v_i(x_i)\) и \(T(x_i)\). Если ограничиться нулевым порядком по \(k\)
-в уравнении Больцмана~\eqref{eq:Boltzmann}, то \(f(\zeta_i)\) в таком пределе станет точечной
+плотности, скорости и температуры.
+В общем случае при таком асимптотическом переходе \(f(\bx,\bzeta)\) является функционалом от
+\(\rho(\bx)\), \(v_i(\bx)\) и \(T(\bx)\). Если ограничиться нулевым порядком по \(k\)
+в уравнении Больцмана~\eqref{eq:Boltzmann}, то \(f(\bzeta)\) в таком пределе станет точечной
 функцией от \(\rho\), \(v_i\) и \(T\). Другими словами, мы получим уравнения Эйлера,
 описывающие локально максвелловское распределение.
 Если левая часть уравнения Больцмана остаётся конечной при малом \(k\),
 тогда столкновительный член \(J(f,f) = \OO{k}\), таким образом асимптотическая теория
 изучает малое отклонение от локально максвелловского распределения.
 
-%%% Два подхода, их различие
+%%% Разложение Гильберта
 Формальное разложение уравнения Больцмана по степеням некоторого параметра было впервые
 предложено Д.~Гильбертом~\cite{Hilbert1912, Hilbert1924}:
 \begin{equation}\label{eq:Hilbert_sum}
     f = \sum_{n=0}^\infty k^n f_n(\bx,\bzeta,t).
 \end{equation}
-Используя теорему Гильберта о единственности, несложно показать, что всякое такое разложение
-однозначно определяется определяется гидродинамическим состоянием.
-Если известно, что \(f(x_i,\zeta_i)\) зависит только от макроскопических переменных \(\rho_r\):
+В общем случае нельзя ожидать сходимость этого ряда.
+Более того решение вида~\eqref{eq:Hilbert_sum} представляет собой весьма узкий класс решений,
+поскольку всякое такое разложение однозначно определяется гидродинамическим состоянием,
+что несложно показать используя теорему Гильберта о единственности.
+
+%%% Разложение Чемпена"--~Энскога
+Если известно, что \(f(\bx,\bzeta)\) зависит только от макроскопических переменных \(\rho_r\):
 \begin{equation}\label{eq:Enskog_macro}
-    \rho_0 = \rho, \quad \rho_i = v_i, \quad \rho_4 = T
+    \rho_0 = \rho, \quad \rho_i = v_i, \quad \rho_4 = T,
 \end{equation}
 и их градиентов произвольного порядка \(\nabla\rho_r = \Pder[\rho_r]{x_i}, \Pderder[\rho_r]{x_i}{x_j},\dots\),
 то задача получения совместимых гидродинамических уравнений может быть решена проще с
-помощью разложения Чемпена"--~Энскога~\cite{Enskog1917, Chapman1960}:
+помощью \emph{разложения Чемпена"--~Энскога}~\cite{Enskog1917, Chapman1960}:
 \begin{equation}\label{eq:Enskog_sum}
     f = \sum_{n=0}^\infty k^n f_n(\rho_r,\nabla\rho_r,\bzeta).
 \end{equation}
-В общем, метод Чемпена"--~Энскога является частным случаем метода сокращения информации,
-широко применяемого в нелинейной теории возмущения~\cite{Bogaevski1987,Bogaevski1991}.
-Детальный сравнительный анализ этих двух подходов можно найти в~\cite{Grad1970, Cercignani1973}.
-
-%%% Недостатки Барнетта и старше
-В зависимости от максимального порядка рассматриваемых членов из разложения Чемпена"--~Энскога
-можно получить уравнения Эйлера, уравнения Навье"--~Стокса, уравнения Барнетта, супербарнеттовские уравнения и т.\,д.
-В отличие от разложения Гильберта, в этих системах растёт порядок дифференциальных уравнений
-с увеличением порядка учитываемых членов. При этом известно, что задача Коши для уравнений Барнетта
-и следующих за ним является некорректно поставленной.
-В частности, амплитуда акустических волн, описываемых этими уравнениями для максвелловских молекул,
-растёт со временем~\cite{Bobylev1982}.
-Для краевой задачи уравнения Барнетта и следующие за ним могут также давать нефизичные решения~\cite{Cercignani1973}.
-Причина этих проблем заключается в том, что в уравнениях, получаемых с помощью разложения Чемпена"--~Энскога,
-происходит смешивание членов различного порядка по \(k\).
-По этой же причине, уравнения Навье"--~Стокса не приводят в общем случае
-к асимптотическому решению уравнения Больцмана,
-они являются поправкой первого порядка к уравнениям Эйлера.
-Строгое асимптотическое решение можно получить с помощью разложения Гильберта.
+В общем подход Чемпена"--~Энскога является методом сокращения информации,
+широко применяемого в нелинейной теории возмущения~\cite{Bogaevski1987, Bogaevski1991}.
 
 %%% Разделение временных масштабов
 Существенной особенностью перехода к \emph{континуальному пределу} (\(k\to0\)) в уравнении Больцмана
 является разделение двух различных временных масштабов времени. Первый масштаб "--- средний интервал
 времени между столкновениями \(\OO{k}\), второй "--- время макроскопического распада посредством
 механизмов диффузии и теплопередачи \(\OO{k^{-1}}\).
-С физической точки зрения, первый период соответствует релаксации \(H\)-функции до термодинамической
-энтропии, а второй "--- релаксации энтропии к своему максимальному значению.
+С физической точки зрения, первый период соответствует релаксации \(\mathcal{H}\)-функционала
+до термодинамической энтропии, а второй "--- релаксации энтропии к своему максимальному значению.
 
 %%% Слои с экспоненциальным ростом функции распределения
-Асимптотическое решение уравнения Больцмана подразумевает достаточно гладкое поведение
-функции распределения во всей области, занимаемой газом, однако в \emph{пограничных}\footnote{
-    Чтобы не вызывать путаницы с общепринятым в гидродинамике термином <<пограничный слой>>,
-    будем последний называть <<слоем Прандтля>>.
-} слоях она может описываться экспонентой по \(1/k\):
+Асимптотическое решение уравнения Больцмана для слаборазреженного газа допускает отделение достаточно гладкой гидродинамической части
+от существенно неравновесных пространственно"=временн\'{ы}х \emph{кинетических пограничных слоёв}:
 \begin{itemize}
-    \item начальный слой, возникающий в момент времени \(t=0\);
-    \item пристеночный слой, возникающий возле физической границы;
-    \item ударный слой (волна), возникающий непосредственно в газе.
+    \item \emph{начальный слой}, возникающий в момент времени \(t=0\);
+    \item \emph{пристеночный слой}, возникающий возле физической границы;
+    \item \emph{ударный слой}, возникающий непосредственно в газе.
 \end{itemize}
-Явное выделение этих слоёв возможно лишь для малых \(k\),
-когда оба временн\'{ы}х масштаба отличаются существенно.
-
-%%% Обобщённое разложение Гильберта
-
-%%% Стационарные задачи
-
-%%% Пристеночные слои
+Явное выделение этих слоёв возможно лишь для малых \(k\), когда оба временн\'{ы}х масштаба отличаются существенно.
+Функция распределения в них содержит экспоненциальный фактор с множителем \(1/k\).
+Пристеночный кинетический слой можно разделить на
 \begin{itemize}
-    \item слой Соне толщиной \(\OO{k^2}\);
-    \item слой Кнудсена толщиной \(\OO{k}\);
-    \item слой Прандтля толщиной \(\OO{\sqrt{k}}\).
+    \item \emph{слой Кнудсена} толщиной \(\OO{k}\),
+    \item \emph{слой Соне} толщиной \(\OO{k^2}\)~\cite{Sone1973}.
 \end{itemize}
+Последний характеризуется проникновением тангенциальных разрывов в скоростном пространстве внутрь области с газом
+и возникает исключительно вокруг выпуклых поверхностей, поскольку все разрывы распространяются вдоль характеристик.
+Кроме кинетических можно выделить \emph{вязкий пограничный слой} (\emph{слой Прандтля}) толщиной \(\OO{\sqrt{k}}\).
 
-%%% Нестационарные задачи
-\todo{Функции Грина}
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[
+        arrow/.style={>={Stealth[scale length=1.5]}, thin, shorten <=.3pt}
+    ]
+        \footnotesize
+        \pgftransformscale{3}
 
-%%% Физика асимптотической теории
-В фундаментальных работах математиков Д.~Гильберта, Д.~Энск\'{о}га, Х.~Грэда
-были заложены основы асимптотической теории для малых \(\Kn\).
-6-ая проблема
-Решение уравнения Больцмана для слаборазреженного газа допускает отделение гидродинамической части
-от существенно неравновесных пространственно"=временн\'{ы}х пограничных областей.
-Например, начальный слой возникает на масштабе времени свободного пробега,
-кнудсеновский и ударный слои "--- на масштабе длины свободного пробега,
-около граничной поверхности и во внутреннем объёме, соотвественно.
-При обтекании тел с конечными числами Маха в приграничной области вне слоя Кнудсена
-формируется также слой Прандтля. У выпуклых тел также выделяется пограничный подслой Соне (С-слой),
-куда распространяются разрывы функции распределения вдоль характеристик.
+        \clip (-0.5,2) rectangle (1.5,5);
 
-%%%Also, these expansions are not expected to be convergent, but only "asymptotic". In fact, a solution of the Boltzmann equation which could be represented as the sum of such a series would be a very particular one (normal in Grad's terminology) : it would be entirely determined by the fields of local density, mean velocity and pressure associated with it.
-%%% Villani2006, p.41
+        \fill[fill=black!20, draw=black, very thick] (0,0) circle [radius=2.5];
+        \foreach \i in {.65,1,2}
+            \draw[semithick] (0,0) circle [radius=2+\i];
 
-%%% Математика асимптотической теории
-%%% Bardos, Golse & Levermore (1991): Systematic program for the proof of hydrodynamic limits of weak solutions, in particular in the incompressible regime;
-%%% Golse & Saint-Raymond (2004): Rigorous proof of the incompressible hydrodynamic limit for weak solutions of the Boltzmann equation; coming after works by Golse, Levermore, Masmoudi and others. this program would take 20 years to be completed
+        \node at (0,2.58) {Соне};
+        \node at (0,2.83) {Кнудсен};
+        \node at (0,3.5) {Прандтль};
+        \node at (0,4.5) {Эйлер};
+
+        \draw[<->, arrow] (81:2.5) -- (81:4) node [right,midway] {\(\OO{\sqrt{k}}\)};
+        \draw[<->, arrow] (73:2.5) -- (73:3) node [right,midway] {\(\OO{k}\)};
+        \draw[thin] (65:2.3) node [above left=-2pt] {\(\OO{k^2}\!\)}  -- (65:2.85);
+        \draw[>-<, arrow, shorten <=-7pt, shorten >=-7pt] (65:2.5) -- (65:2.65) ;
+    \end{tikzpicture}
+    \caption[
+        Многослойная (многопалубная) структура течения слаборазреженного газа около выпуклого тела.
+    ]{
+        Многослойная (многопалубная) структура течения слаборазреженного газа около выпуклого тела:
+        в невязкой области \(n_i\Pder[f]{x_i}=\OO{f}\);
+        в слое Прандтля \(\sqrt{k}n_i\Pder[f]{x_i}=\OO{f}\);
+        в слое Кнудсена \(kn_i\Pder[f]{x_i}=\OO{f}\);
+        в слое Соне \(f\) разрывна.
+    }\label{fig:asymptotic_structure}
+\end{figure}
+
+%%% Недостатки Барнетта и старше
+В зависимости от максимального порядка рассматриваемых членов из разложения Чемпена"--~Энскога можно получить
+уравнения Эйлера, уравнения Навье"--~Стокса для сжимаемых течений, уравнения Барнетта, супербарнеттовские уравнения и т.\,д.
+В отличие от разложения Гильберта, в этих системах растёт порядок дифференциальных уравнений
+с увеличением порядка учитываемых членов.
+При этом известно, что задача Коши для уравнений Барнетта и следующих за ним является некорректно поставленной.
+В частности, амплитуда акустических волн, описываемых этими уравнениями для максвелловских молекул,
+растёт со временем~\cite{Bobylev1982}.
+Другими словами, получаемые решения нестабильны по отношению к коротковолновым возмущениям.
+Для краевой задачи уравнения Барнетта и следующие за ним могут также давать нефизичные решения~\cite{Cercignani1973}.
+Причина этих проблем заключается в том, что в уравнениях, получаемых с помощью разложения Чемпена"--~Энскога,
+происходит смешивание членов различного порядка по \(k\).
+По этой же причине, уравнения Навье"--~Стокса для сжимаемых течений являются поправкой первого порядка к уравнениям Эйлера,
+но не асимптотическим решением уравнения Больцмана.
+
+Строгое асимптотическое решение можно получить с помощью разложения Гильберта,
+однако при конечных числах Маха оно имеет весьма сложную структуру (рис.~\ref{fig:asymptotic_structure}),
+поскольку требуется сращивание решений уравнений Эйлера, уравнений Прандтля в вязких пограничных слоях
+и непосредственно уравнения Больцмана в кинетических пограничных слоях~\cite{Sone2000}.
+Поэтому на практике численный анализ течений проводится с помощью только лишь уравнений Навье"--~Стокса для сжимаемых течений,
+сочетающих несколько упомянутых временных масштабов.
+
+%%% ghost effect
+При различном пространственно"=временн\'{о}м масштабировании асимптотическая система уравнений гидродинамического типа
+может содержать макроскопические переменные разного порядка~\cite{Bardos2008}.
+В некоторых случаях это приводит к тому, что инфинитезимальные в континуальном пределе величины
+конечным образом влияют на поля макроскопических переменных нулевого порядка.
+Поскольку эти величины ненулевого порядка формально не существуют в континуальном мире,
+то Ё.~Соне предложил ввести понятие призрак"=эффекта (ghost effect) для описания такого предельного поведения~\cite{Sone2000ghost}.
+
+\subsection{Обзор строгих математических результатов}
+
+%%% incompressible Navier--Stokes
+Строгая асимптотическая теория тесно связана с развитием математической теории самих гидродинамических уравнений.
+Ж.~Лер\'{е} в своих классических трудах доказал существование слабых решений уравнений Навье"--~Стокса
+для несжимаемых течений~\cite{Leray1934}.
+К.~Бардос, Ф.~Гольс и Д.~Левермор впервые поставили задачу сходимости к ним ренормализованных решений ди-Перна"--~Лионса~\cite{Bardos1991}
+и получили первые частные результаты~\cite{Bardos1993} вместе с П.-Л.~Лионсом и Н.~Масмоуди~\cite{Masmoudi2001}.
+В 2004 году Ф.~Гольс и Л.~Сен-Ремон построили доказательство для ограниченных ядер~\cite{Golse2004}
+и позже обобщили для неограниченных~\cite{Golse2009}.
+Окончательно \emph{программу Бардоса"--~Гольса"--~Левермора} завершил тунисский математик Н.~Масмоуди,
+распространив результат для дальнодействующих потенциалов~\cite{Masmoudi2010}.
+
+%%% compressible Euler
+Строгая асимптотическая теория для сжимаемых течений далека от своей зрелости.
+Частичные результаты о сходимости к гладким решениям уравнений Эйлера принадлежат
+Т.~Нишиде~\cite{Nishida1978} и Р.~Кафлишу~\cite{Caflisch1980limit}.
+Больцмановская динамика процессов высокой частоты (сравнимой с частотой столкновений молекул)
+качественно отличается от классической гидродинамики на основе линейных законов Ньютона и Фурье.
+% the saturation of dissipation for high frequencies and the nonlocal character of the hydrodynamic equations
+На основе множества работ И.\,В.~Карлина, А.\,Н.~Горбаня, М.~Слемрода совместно с другими авторами,
+можно сделать вывод, что в пределе малых чисел Кнудсена и конечных числах Маха корректные уравнения
+гидродинамического типа должны демонстрировать константную диссипацию высокочастотных мод
+и существенно нелокальный характер~\cite{Gorban2014}.
 
 %%% кинетические слои
-\emph{Пограничные} кинетические слои моделируются краевыми задачами в полупространстве~\autocite{Grad1969}.
+Пограничные кинетические слои моделируются краевыми задачами в полупространстве~\cite{Grad1969}.
 Соответствующие им теоремы существования и единственности решения линеаризованного уравнения Больцмана для газа твёрдых сфер
-были доказаны Н.\,Б.~Масловой~\autocite{Maslova1982} и независимо К.~Бардосом, Р.~Кафлишем, Б.~Николаенко~\autocite{Bardos1986}.
-Пограничный слой с конденсацией и испарением изучен К.~Черчиньяни~\autocite{Cercignani1986}
-и учениками К.~Бардоса~\autocite{Coron1988}.
-Нелинейная теория заложена в трудах Л.~Аркерюда, А.~Нури~\autocite{Arkeryd2000},
-С.~Юкая, Т.~Янга, Ш.-С.~Ю~\autocite{Ukai2003} и Ф.~Гольса~\autocite{Golse2008}.
+были доказаны Н.\,Б.~Масловой~\cite{Maslova1982} и независимо К.~Бардосом, Р.~Кафлишем, Б.~Николаенко~\cite{Bardos1986}.
+Пограничный слой с конденсацией и испарением изучен К.~Черчиньяни~\cite{Cercignani1986}
+и учениками К.~Бардоса~\cite{Coron1988}.
+Нелинейная теория заложена в трудах Л.~Аркерюда, А.~Нури~\cite{Arkeryd2000},
+С.~Юкая, Т.~Янга, Ш.-С.~Ю~\cite{Ukai2003} и Ф.~Гольса~\cite{Golse2008}.
 Кинетическая теория ударных волн развита только для малых амплитуд.
-Для жёстких короткодействующих потенциалов ударный профиль впервые был построен Р.~Кафлишем и Б.~Николаенко~\autocite{Caflisch1982}.
-Cтабильность, позитивность~\autocite{Liu2004} и монотонность~\autocite{Liu2013} была показана Т.-П.~Лю и Ш.-С.~Ю.
+Для жёстких короткодействующих потенциалов ударный профиль впервые был построен Р.~Кафлишем и Б.~Николаенко~\cite{Caflisch1982}.
+Его стабильность, позитивность~\cite{Liu2004} и монотонность~\cite{Liu2013} была показана Т.-П.~Лю и Ш.-С.~Ю. % Тай-Пин Лю, Ши-Сянь Ю
 
-%В трудах Киотской группы реализована масштабная программа высокоточного численного анализа классических задач молекулярной газодинамики
-%на основе линеаризованного уравнения Больцмана для газа твёрдых сфер.
+\subsection{Слабовозмущённые течения}
 
+Рассмотрим слаборазреженный газ, описываемый стационарным линеаризованным уравнением Больцмана~\eqref{eq:linear_Boltzmann}.
+Абстрагируясь сначала от граничных условий, будем искать решение в виде степенного ряда,
+называемого \emph{разложением Грэда"--~Гильберта} (будем приписывать индекс \(G\)),
+\begin{equation}\label{eq:gh:phi_sum}
+    \phi_G(\bx,\bzeta) = \sum_{m=0}^\infty \phi_{Gm}(\bx,\bzeta)k^m,
+\end{equation}
+подразумевая, что
+\begin{equation}\label{eq:gh:fluid_assumption}
+    \pder[\phi_G]{x_i} = \OO{\phi_G}.
+\end{equation}
+Соответствующие макроскопические величины \(h_G=\omega_G, v_{iG}, \tau_G,\dots\) также могут быть разложены в ряд
+\begin{equation}\label{eq:gh:macro_sum}
+    h_G(\bx) = \sum_{m=0}^\infty h_{Gm}(\bx)k^m.
+\end{equation}
+Подставляя~\eqref{eq:gh:phi_sum} в~\eqref{eq:linear_Boltzmann} и приравнивая члены одного порядка по \(k\),
+получаем ряд интегральных уравнений для \(\phi_{Gm}\):
+\begin{align}
+    \mathcal{L}(\phi_{G0}) &= 0, \label{eq:gh:integral_eqn_0}\\
+    \mathcal{L}(\phi_{Gm}) &= \zeta_i\pder[\phi_{Gm-1}]{x_i} \quad (m=1,2,3,\dots). \label{eq:gh:integral_eqn_m}
+\end{align}
+Однородное уравнение~\eqref{eq:gh:integral_eqn_0} имеет решение
+в виде возмущённого распределения Максвелла~\eqref{eq:linear_maxwellian},
+а для неоднородных уравнений~\eqref{eq:gh:integral_eqn_m} должны выполняться условия разрешимости
+\begin{equation}\label{eq:gh:solvability}
+    \int\psi_r\zeta_i\pder[\phi_{Gm-1}]{x_i}E\dzeta = 0,
+\end{equation}
+где \(\psi_r\) "--- инварианты столкновений~\eqref{eq:summational_invariants}.
+В силу изотропных свойств оператора \(\mathcal{L}\) первые члены разложения Грэда"--~Гильберта имеют вид
+\begin{multline}\label{eq:gh:phi_explicit}
+    \phi_G = \phi_{GM} - \left( \ZZ B(\zeta)\pder[v_{iG}]{x_j}
+        + \Z A(\zeta)\pder[\tau_G]{x_i}
+        + \frac1{\gamma_1}\Z D_1(\zeta)\pder[P_G]{x_i}
+    \right)k \\ + \left( \ZZZ D_2(\zeta)\pderder[v_{iG}]{x_j}{x_k}
+        - \ZZ F(\zeta)\pderder[\tau_G]{x_i}{x_j}
+    \right)k^2 + \OO{k^3}
+\end{multline}
+а соответствующие условия разрешимости дают \emph{уравнения Стокса}:
+\begin{equation}\label{eq:gh:stokes}
+    \left.\begin{gathered}
+        \pder[P_{G0}]{x_i} = 0, \quad \pder[v_{iG0}]{x_i} = 0, \\
+        \pder[P_{Gm+1}]{x_i} = \gamma_1\pderdual[v_{iGm}]{x_j}, \quad
+        \pderdual[\tau_{Gm}]{x_i} = 0.
+    \end{gathered}\quad\right\} \quad (m=0,1,2,\dots)
+\end{equation}
+Тензор напряжения и вектор потока могут быть вычислены из~\eqref{eq:gh:phi_explicit}:
+\begin{gather}
+    P_{ijG} = P_G\delta_{ij} - \gamma_1 \left( \pder[v_{iG}]{x_j} + \pder[v_j]{x_i} \right)k
+        + \left( \gamma_3\pderder[\tau_G]{x_i}{x_j}
+            - \frac{\gamma_6}{\gamma_1}\pderder[P_G]{x_i}{x_j} \right)k^2 + \OO{k^4} \label{eq:gh:stress}\\
+    Q_{iG} = - \left( \frac54\gamma_2\pder[\tau_G]{x_i}
+        - \frac{\gamma_3}{2\gamma_1}\pder[P_G]{x_i} \right)k + \OO{k^4} \label{eq:gh:heat_flux}
+\end{gather}
 
-Теорема о существовании и единственности решения линеаризованных краевых задач в полупространстве
-(гипотеза Х.~Грэда, доказательства Н.\,Б.~Масловой, позже К.~Бардоса и др.)
-позволила определять граничные условия для соответствующих уравнений гидродинамического типа
-на основе численного анализа кнудсеновского слоя.
-Асимптотическая теория нашла широкое применение в трудах Киотской группы
-(Ё.~Соне, К.~Аоки, Ш.~Таката и др.) для систематического анализа множества классических задач.
-Говоря об асимптотической теории часто подразумевают формальные разложения Гильберта и Чепмена"--~Энск\'{о}га,
-не имеющие строгого математического обоснования. В частности, А.\,В.~Бобылев показал,
-что уравнения Барнетта, получаемые в третьем приближении, неустойчивы.
-Гидродинамические пределы уравнения Больцмана очень многообразны, их исследованию
-посвящено множество трудов, в частности, Парижской группы (К.~Бардос, Ф.~Гольс, Л.~Сен-Ремон),
-С.~Юкая, Ч.\,Д.~Левермора.
-%% Golse,Saint-Raymond2001 сходимость ренормализованных диПерна-Лионса к слабым решениям Лере для несжим. НС.
-%Она схожа с теорией Ж.~Лер\'{е} существования слабых решений уравнений Навье"--~Стокса~\cite{Leray1934}.
+Функции \(A(\zeta)\), \(B(\zeta)\), \(D_1(\zeta)\), \(D_2(\zeta)\), \(F(\zeta)\)
+являются решениями следующих интегральных уравнений:
+\begin{gather}
+    \mathcal{L}\left[\Z A(\zeta)\right] = -\Z \left(\zeta^2-\frac52\right), \label{eq:gh:A}\\
+    \mathcal{L}\left[\left(\ZZ-\frac13\zeta^2\delta_{ij}\right)B(\zeta)\right] =
+        -2\left(\ZZ-\frac13\zeta^2\delta_{ij}\right), \label{eq:gh:B}\\
+    \mathcal{L}\left[\left(\ZZ-\frac13\zeta^2\delta_{ij}\right)F(\zeta)\right] =
+        \left(\ZZ-\frac13\zeta^2\delta_{ij}\right)A(\zeta), \label{eq:gh:F}\\
+    \begin{multlined}
+        \mathcal{L}\left[(\ZD{i}{jk}+\ZD{j}{ki}+\ZD{k}{ij})D_1(\zeta) + \ZZZ D_2(\zeta)\right] \\
+            = \gamma_1(\ZD{i}{jk}+\ZD{j}{ki}+\ZD{k}{ij}) - \ZZZ B(\zeta),
+    \end{multlined}\label{eq:gh:D}
+\end{gather}
+при дополнительных условиях:
+\begin{gather}
+    \int_0^\infty \zeta^4 A(\zeta)\exp(-\zeta^2)\dd\zeta = 0, \\
+    \int_0^\infty \left[ 5\zeta^4 D_1(\zeta) + \zeta^6 D_2(\zeta) \right]\exp(-\zeta^2)\dd\zeta = 0.
+\end{gather}
+Транспортные коэффициенты вычисляются через соответствующие интегралы от этих функций:
+\begin{equation}\label{eq:gh:gammas}
+    \left.\begin{aligned}
+        \gamma_1 &= I_6(B), \quad \gamma_2 = 2I_6(A), \\
+        \gamma_3 &= I_6(AB) = -2I_6(F), \\
+        \gamma_6 &= \frac12 I_6(BD_1) + \frac{3}{14} I_8(BD_2),
+    \end{aligned}\quad\right\}
+\end{equation}
+где
+\begin{equation}\label{eq:gh:I_Z}
+    I_n(Z) = \frac{8}{15\sqrt\pi}\int_0^\infty \zeta^n Z(\zeta) \exp(-\zeta^2)\dd\zeta.
+\end{equation}
+Для газа твёрдых сфер
+\begin{equation}\label{eq:gh:gammas_hs}
+    \left.\begin{aligned}
+        \gamma_1 &= 1.270042427, \quad \gamma_2 &= 1.922284066, \\
+        \gamma_3 &= 1.947906335, \quad \gamma_6 &= 1.419423836,
+    \end{aligned}\quad\right\}
+\end{equation}
+а для модели Крука"--~Веландера
+\begin{equation}\label{eq:gh:gammas_bgk}
+    \gamma_1 = \gamma_2 = \gamma_3 = \gamma_6 = 1.
+\end{equation}
 
-В некоторых случаях решение системы уравнений гидродинамического типа
-проявляет кинетические эффекты даже в континуальном пределе.
-Ё.~Соне ввёл понятие призрак"=эффекта (ghost effect) для описания этого феномена.
+\subsubsection{Слой Кнудсена и граничные условия}
 
+Разложение Грэда"--~Гильберта не обладает достаточным количеством свободных параметров,
+чтобы удовлетворить кинетическим граничным условиям, например диффузного отражения~\eqref{eq:linear_diffuse_bc}.
+При малых \(k\) решение стационарного уравнения Больцмана допускает разделение пространственных масштабов,
+так что оно может быть найдено в форме
+\begin{equation}\label{eq:gh:sum_solutions}
+    \phi = \phi_G + \phi_K,
+\end{equation}
+где \(\phi_G\) "--- \emph{гидродинамическая часть} решения с масштабом порядка единицы,
+\(\phi_K\) "--- \emph{кнудсеновская часть} или \emph{поправка кнудсеновского слоя} с масштабом порядка \(k\).
+Оказывается, что кинетические граничные условия могут быть удовлетворены в предположении
+\begin{equation}\label{eq:gh:knudsen_assumption}
+    kn_i\pder[\phi_K]{x_i} = \OO{\phi_K}.
+\end{equation}
 
-\subsection{Линеаризованные течения}
+Вводя естественную для слоя Кнудсена локальную систему координат \((\eta,\chi_1,\chi_2)\),
+\begin{equation}\label{eq:eta_definition}
+    x_i = k\eta n_i(\chi_1,\chi_2) + x_{Bi}(\chi_1,\chi_2),
+\end{equation}
+где \(x_{Bi}\) "--- граничная поверхность, \(\eta\) "--- координата, растянутая вдоль нормали \(n_i\),
+\(\chi_1\) и \(\chi_2\) "--- ортогональные координаты поверхности \(\eta=const\),
+получаем уравнение для \(\phi_K\):
+\begin{equation}\label{eq:gh:knudsen_equation}
+    \zeta_in_i\pder[\phi_K]{\eta} = \mathcal{L}(\phi_K)
+    - k\zeta_i\left(\pder[\chi_1]{x_i}\pder[\phi_K]{\chi_1} + \pder[\chi_2]{x_i}\pder[\phi_K]{\chi_2}\right).
+\end{equation}
+Раскладывая \(\phi_K\) в аналогичный степенной ряд
+\begin{equation}\label{eq:gh:phiK_sum}
+    \phi_K(\bx,\bzeta) = \sum_{n=0}^\infty k^n \phi_{Kn}(\bx,\bzeta)
+\end{equation}
+и приравнивая члены одного порядка по \(k\), получаем пространственно"=одномерные уравнения
+для \(\phi_{K0}\) и \(\phi_{K1}\):
+\begin{gather}
+    \zeta_in_i\pder[\phi_{K0}]{\eta} = \mathcal{L}(\phi_{K0}), \label{eq:gh:knlayer0}\\
+    \zeta_in_i\pder[\phi_{K1}]{\eta} = \mathcal{L}(\phi_{K1})
+        - \zeta_i\left[ \onwall{\pder[\chi_1]{x_i}} \pder[\phi_{K0}]{\chi_1}
+            + \onwall{\pder[\chi_2]{x_i}} \pder[\phi_{K0}]{\chi_2}
+        \right], \label{eq:gh:knlayer1}
+\end{gather}
+с граничными условиями:
+\begin{equation}\label{eq:gh:phiK_bc}
+    \onwall{\phi_{Km}} = \phi_{Bm} - \onwall{\phi_{Gm}} \quad (\zeta_in_i>0),
+        \quad \lim_{\eta\to\infty} \phi_{Km} = 0,
+\end{equation}
+где \(\onwall{\cdots}\) означает значение на границе (\(\eta=0\)).
+Решение поставленных задач в полупространстве существует при определённых функциональных соотношениях
+между \(\omega_{Gm}\), \(v_{iGm}\), \(\tau_{Gm}\) и локальными параметрами \(\phi_{Bm}\).
+При дополнительном требовании
+\begin{equation}\label{eq:gh:phiK_exp_decay}
+    \phi_{Km} = \OO{\eta^{-\infty}}, \quad \eta\to\infty
+\end{equation}
+достигается единственность, определяющая однозначность декомпозиции~\eqref{eq:gh:sum_solutions}.
 
-%%% Линеализованные течения
-При отсутствии значительных температурных градиентов медленные течения описываются
-линеаризованным уравнением Больцмана. Первые аналитические решения отдельных задач на его основе
-для модельных уравнений появились в 1960-х годах в трудах П.~Веландера, Д.\,Р.~Виллиса, К.~Черчиньяни и др.
-Непосредственные численные решения высокой точности линеаризованного уравнения Больцмана
-для газа твёрдых сфер были получены в 1989--92 годах усилиями Киотской группы.
-%%%%%%%%% нужны цитирования
-
-\subsubsection{Гидродинамические уравнения}
-\todo{Разложение Грэда"--~Гильберта}
-\subsubsection{Коррекция в кнудсеновском слое}
-
+Для диффузного отражения~\eqref{eq:linear_diffuse_bc} получаются
+следующие гидродинамические граничные условия и поправки кнудсеновского слоя:
+\begin{gather}
+    \begin{aligned}
+    \begin{bmatrix} (v_{jG} - v_{Bj}) \\ v_{jK} \end{bmatrix} \deltann{i}{j} =
+        &- \onwall{\pder[v_{jG}]{x_k} + \pder[v_k]{x_j}} \deltann{i}{j}n_k
+            \begin{bmatrix} k_0 \\ Y_0(\eta) \end{bmatrix}k \\
+        &- \onwall{\pder[\tau_G]{x_j}} \deltann{i}{j}
+            \begin{bmatrix} K_1 \\ \frac12 Y_1(\eta) \end{bmatrix}k + \OO{k^2},
+    \end{aligned} \label{eq:gh:boundary_vt}\\
+    \begin{bmatrix} v_{iG} \\ v_{iK} \end{bmatrix} n_i = \OO{k^2}, \label{eq:gh:boundary_vn}\\
+    \begin{bmatrix} \tau_G - \tau_B \\ \tau_K \\ \omega_K \end{bmatrix}
+        = \onwall{\pder[\tau_G]{x_i}} n_i
+            \begin{bmatrix} d_1 \\ \Theta_1(\eta) \\ \Omega_1(\eta) \end{bmatrix}k
+        + \OO{k^2}. \label{eq:gh:boundary_tau}
+\end{gather}
+За каждым из полученных коэффициентов закреплен соответствующий термин, отражающий его физический смысл.
+\(k_0\) и \(d_1\) соответствуют \emph{скоростному и температурному скачкам}, а \(K_1\) \emph{тепловому скольжению}.
+Для газа твёрдых сфер~\cite{Ohwada1989creep, Ohwada1989jump, Takata2015}
+\begin{equation}\label{eq:slip_coeffs_first}
+    k_0 = -1.25395, \quad d_1 = 2.40014, \quad K_1 = -0.64642.
+\end{equation}
+Поскольку \(K_1<0\), направление теплового скольжения совпадает
+с направлением градиента температуры граничной поверхности.
+Функции \(Y_0(\eta)\), \(Y_1(\eta)\), \(\Theta_1(\eta)\), \(\Omega_1(\eta)\) убывают экспоненциально от \(\eta\)
+и табулированы для газа твёрдых сфер в~\cite{Ohwada1989creep, Ohwada1989jump, Sone2002, Sone2007, Takata2015}.
 
 \subsection{Медленные неизотермические течения}
 
-%%% Медленные неизотермические течения
 Для \emph{медленных неизотермических течений} (малые числа Маха, значительные перепады температур)
 нелинейная асимптотическая теория приводит к \emph{уравнениям Когана"--~Галкина"--~Фридлендера} (КГФ)~\cite{Kogan1976},
 описывающим поведение газа в гидродинамической области.
@@ -891,17 +1012,433 @@ Cтабильность, позитивность~\autocite{Liu2004} и моно
 В результате многолетнего труда под руководством О.\,Г. Фридлендера теория медленных неизотермических течений
 была подтверждена экспериментально~\cite{Friedlander1997, Friedlander2003}.
 
-
-%    В рамках платформы OpenFOAM разработан солвер уравнений КГФ
-%    на основе метода конечных объёмов и модифицированного алгоритма SIMPLE~\cite{Rogozin2014}.
+Далее излагаются основные результаты нелинейной асимптотической теории на основе разложения Гильберта.
+Решение, как в случае слабовозмущённых течений, может быть найдено в виде суммы
+\begin{equation}\label{eq:sum_solutions}
+    f = f_H + f_K,
+\end{equation}
+где гидродинамическая часть (\emph{разложение Гильберта}) \(f_H\),
+и поправка кнудсеновского слоя \(f_K\) обладают следующими свойствами:
+\begin{align}
+    \pder[f_H]{x_i} = \OO{f_H}, &\quad k\to0, \label{eq:Hilbert_assumption}\\
+    k n_i\pder[f_K]{x_i} = \OO{f_K}, &\quad k\to0, \label{eq:Knudsen_assumption}\\
+    f_K = \OO{\eta^{-\infty}}, &\quad \eta\to\infty. \label{eq:Knudsen_decay}
+\end{align}
 
 \subsubsection{Гидродинамические уравнения}
-\subsubsection{Коррекция в кнудсеновском слое}
-\subsubsection{Классификация течений, вызываемых температурными напряжениями}
 
-\subsection{Плоско-параллельные течения при конечных чисел Маха}
+Функция распределения \(f_H\) и макроскопические переменные \(h_H = \rho_H, v_{iH}, T_H, \dots\)
+также разлагаются в ряд по \(k\):
+\begin{equation}\label{eq:Hilbert_expansion}
+    f_H = \sum_{m=0}^\infty f_{Hm} k^m, \quad h_H = \sum_{m=0}^\infty h_{Hm} k^m.
+\end{equation}
+Будем искать решение уравнения Больцмана в предположении
+медленности течения (\(v_{iH0} = 0\)) и слабости поля внешних сил (\(F_{iH0} = F_{iH1} = 0\)).
+Подставляя~\eqref{eq:Hilbert_expansion} в уравнение Больцмана~\eqref{eq:Boltzmann} и приравнивая члены
+при равных степенях \(k\), получаем систему интегро"=дифференциальных уравнений,
+для которой должны выполняться условия разрешимости. В нулевом порядке
+\begin{equation}
+    \pder[p_{H0}]{x_i} = 0. \label{eq:kgf:asymptotic0_p}
+\end{equation}
+В первом
+\begin{gather}
+    \pder{x_i}\left(\frac{u_{iH1}}{T_{H0}}\right) = 0, \label{eq:kgf:asymptotic1_u} \\
+    \pder[p_{H1}]{x_i} = 0, \label{eq:kgf:asymptotic1_p} \\
+    \pder[u_{iH1}]{x_i} = \frac12\pder{x_i}\left(\Gamma_2\pder[T_{H0}]{x_i}\right). \label{eq:kgf:asymptotic1_T}
+\end{gather}
+Во втором при \(p_{H1} = 0\)
+\begin{gather}
+    \pder{x_i}\left(\frac{u_{iH2}}{T_{H0}}\right)
+        = \frac{u_{iH1}}{T_{H0}}\pder{x_i}\left(\frac{T_{H1}}{T_{H0}}\right), \label{eq:kgf:asymptotic2_u} \\
+    \begin{aligned}
+        \pder{x_j}\left(\frac{u_{iH1}u_{jH1}}{T_{H0}}\right)
+        &-\frac12\pder{x_j}\left[\Gamma_1\left(
+            \pder[u_{iH1}]{x_j} + \pder[u_{jH1}]{x_i} - \frac23\pder[u_{kH1}]{x_k}\delta_{ij}
+        \right)\right] \\
+        &-\left[
+            \frac{\Gamma_7}{\Gamma_2}\frac{u_{jH1}}{T_{H0}}\pder[T_{H0}]{x_j}
+            + \frac{\Gamma_2^2}4 \left(\frac{\Gamma_7}{\Gamma_2^2}\right)'
+                \left(\pder[T_{H0}]{x_j}\right)^2
+        \right]\pder[T_{H0}]{x_i} \\
+        &= -\frac12\pder[p_{H2}^\dag]{x_i} + \frac{p_{H0}^2 F_{iH2}}{T_{H0}},
+    \end{aligned} \label{eq:kgf:asymptotic2_p} \\
+    \pder[u_{iH2}]{x_i} = \frac12\pderdual{x_i}\left(\Gamma_2T_{H1}\right). \label{eq:kgf:asymptotic2_T}
+\end{gather}
+Здесь введены следущие обозначения: \(u_{iH1} = p_{H0}v_{iH1}\), \(u_{iH2} = p_{H0}v_{iH2}\) и
+\begin{equation}\label{eq:kgf:dag_pressure}
+    p_{H2}^\dag = p_0 p_{H2}
+        + \frac23\pder{x_k}\left(\Gamma_3\pder[T_{H0}]{x_k}\right)
+        - \frac{\Gamma_7}{6}\left(\pder[T_{H0}]{x_k}\right)^2.
+\end{equation}
+Уравнения~\eqref{eq:kgf:asymptotic1_u},~\eqref{eq:kgf:asymptotic1_T},~\eqref{eq:kgf:asymptotic2_p}
+для \(T_{H0}\), \(u_{iH1}\) и \(p_{H2}^\dag\) называются \emph{уравнениями Когана"--~Галкина"--~Фридлендера}.
+Они содержат член температурных напряжений, отсутствующий в уравнениях Навье"--~Стокса.
+Сравнивая его с \(p_{H0}^2F_{iH2}/T_{H0}\), можно увидеть, что на покоящуюся единицу массы газа действует сила
+\begin{equation}\label{eq:kgf:gamma7_force}
+    F_i = \frac{\Gamma_2^2}4\left(\frac{\Gamma_7}{\Gamma_2^2}\right)'\frac{T_H}{p_H^2}
+        \left(\pder[T_H]{x_j}\right)^2 \pder[T_H]{x_i} k^2 + \OO{k^3}.
+\end{equation}
+Она исчезает только тогда, когда изотермические поверхности параллельны:
+\begin{equation}\label{eq:kgf:parallel}
+    e_{ijk}\pder[T_{H0}]{x_j}\pder{x_k}\left(\pder[T_{H0}]{x_l}\right)^2 = 0.
+\end{equation}
+В~\eqref{eq:kgf:parallel} использован символ Л\'{е}ви-Чив\'{и}ты \(e_{ijk}\).
+Движение газа под действием этой силы называется \emph{нелинейным термострессовым} течением.
+Важно отметить, что \(p_{H2}^\dag\) не входит непосредственно в уравнение состояния,
+поэтому определяется с точностью до константы.
 
-\subsubsection{Гидродинамические уравнения}
-\subsubsection{Коррекция в кнудсеновском слое}
+Транспортные коэффициенты \(\Gamma_i=\Gamma_i(T_{H0})\) зависят от температуры.
+Первые два из них соответствуют размерным вязкости \(\mu\) и теплопроводности \(\lambda\) газа,
+\begin{equation}\label{eq:mu_lambda}
+    \mu = \Gamma_1(T_H) \frac{p^{(0)}L}{\sqrt{2RT^{(0)}}} k, \quad
+    \lambda = \frac{5\Gamma_2(T_H)}{2} \frac{p^{(0)}RL}{\sqrt{2RT^{(0)}}} k.
+\end{equation}
+Для степенного молекулярного потенциала можно записать
+\begin{equation}\label{eq:kgf:Gammas}
+    \Gamma_{1,2}(T) = \gamma_{1,2}T^s, \quad \Gamma_3(T) = \gamma_3T^{2s},
+        \quad \Gamma_7(T) = \Gamma_3' - \gamma_7T^{2s-1}.
+\end{equation}
+Для газа твёрдых сфер
+\begin{equation}\label{eq:kgf:gammas}
+    s=0.5, \quad \gamma_7 = 0.189201, \quad \Gamma_7 = 1.758705,
+\end{equation}
+для модели Крука"--~Веландера
+\begin{equation}\label{eq:kgf:gammas_bgk}
+    s=1, \quad \gamma_7 = 1, \quad \Gamma_7 = 1.
+\end{equation}
+
+Тензор напряжений и вектор потока тепла вычисляются по следующим формулам:
+\begin{gather}
+    \begin{aligned}
+    p_{ijH} = p_H\delta_{ij} &- \frac{\Gamma_1}{p_H}\left(
+            \pder[u_{iH}]{x_j} + \pder[u_{jH}]{x_i} - \frac23\pder[u_{kH}]{x_k}\delta_{ij} \right)k \\
+        &+ \frac{\Gamma_3'-\Gamma_7}{p_H}\left[
+            \pder[T_H]{x_i}\pder[T_H]{x_j} - \frac13\left(\pder[T_H]{x_k}\right)^2\delta_{ij} \right]k^2 \\
+        &+ \frac{\Gamma_3}{p_H}\left(
+            \pderder[T_H]{x_i}{x_j} - \frac13\pderdual[T_H]{x_k}\delta_{ij} \right)k^2 + \OO{k^3},
+    \end{aligned} \label{eq:kgf:stress} \\
+    q_{iH} = -\frac54\Gamma_2\pder[T_H]{x_i}k + \OO{k^3}. \label{eq:kgf:heat_flux}
+\end{gather}
+
+Коэффициент \(\Gamma_3\) входит в выражения температурных напряжений,
+но не движущую силу. Для степенного потенциала
+\begin{equation}\label{eq:kgf:gamma7_force_simple}
+    F_i = -\frac{\Gamma_7}{4p_H} \left(\pder[T_H]{x_j}\right)^2 \pder[T_H]{x_i} k^2 + \OO{k^3},
+\end{equation}
+поэтому при \(\Gamma_7>0\) нелинейное термострессовое течение возникает в направлении
+противоположном градиенту температур.
+
+\subsubsection{Слой Кнудсена и граничные условия}
+
+Используя локальные координаты кнудсеновского слоя~\eqref{eq:eta_definition},
+находим, что \(f_K\) подчиняется уравнению
+\begin{equation}\label{eq:fK_equation}
+    \zeta_in_i\pder[f_K]{\eta} = 2J(f_H,f_K) + J(f_K,f_K)
+    - k\zeta_i\left(\pder[\chi_1]{x_i}\pder[f_K]{\chi_1} + \pder[\chi_2]{x_i}\pder[f_K]{\chi_2}\right).
+\end{equation}
+В нулевом порядке гидродинамическая часть решения является максвеллианом,
+удовлетворяющий граничному условию диффузного отражения при
+\begin{equation}\label{eq:kgf:boundary_T0}
+    T_{H0} = T_B,
+\end{equation}
+а значит \(f_{K0} = 0\). Используя разложения
+\begin{gather}
+    f_K = f_{K1}k + f_{K2}k^2 + \cdots, \label{eq:knlayer_expansion}\\
+    f_H = \onwall{f_{H0}} + \left[\onwall{f_{H1}} + \eta\onwall{\pder[f_{H0}]{x_i}}n_i \right]k + \cdots, \label{eq:Honwall_expansion}
+\end{gather}
+где \(\onwall{\cdots}\) означает значение на границе (\(\eta=0\)),
+получаем уравнения для \(f_{K1}\) и \(f_{K2}\):
+\begin{gather}
+    \zeta_in_i\pder[f_{K1}]{\eta} = 2J\left[\onwall{f_{H0}},f_{K1}\right], \label{eq:knlayer1}\\
+    \begin{multlined}
+        \zeta_in_i\pder[f_{K2}]{\eta} = 2J\left[\onwall{f_{H0}}, f_{K2}\right]
+        - \zeta_i\left[\onwall{\pder[\chi_1]{x_i}}\pder[f_{K1}]{\chi_1} + \onwall{\pder[\chi_2]{x_i}}\pder[f_{K1}]{\chi_2}\right] \\
+        + 2J\left[\onwall{f_{H1}}+\eta\onwall{\pder[f_{H0}]{x_i}}n_i,f_{K1}\right] + J(f_{K1},f_{K1}).
+    \end{multlined}\label{eq:knlayer2}
+\end{gather}
+Поскольку
+\begin{equation}\label{eq:knudsen_linearization}
+    2J\left[\onwall{f_{H0}},f_{K1}\right] = \mathcal{L}\left(\frac{f_{K1}}{\onwall{f_{H0}}}\right)\onwall{f_{H0}},
+\end{equation}
+то опять получаем одномерные задачи в полупространстве \(\eta\in(0,+\infty)\) для линеаризованного
+около \(\onwall{f_{H0}}\) уравнения Больцмана с граничными условиями
+\begin{equation}\label{eq:fK_bc}
+    \onwall{f_{Km}} = f_{Bm} - \onwall{f_{Hm}} \quad (\zeta_in_i>0),
+        \quad \lim_{\eta\to\infty} f_{Km} = \onwall{f_{Hm}} \quad (m=1,2,3,\dots).
+\end{equation}
+
+Однородное уравнение~\eqref{eq:knlayer1} приводит к следующим
+граничным условиям и поправкам кнудсеновского слоя:
+\begin{gather}
+    \frac1{\sqrt{T_{B0}}}\begin{bmatrix} (u_{jH1} - u_{Bj1}) \\ u_{jK1} \end{bmatrix} \deltann{i}{j} =
+        - \onwall{\pder[T_{H0}]{x_j}} \deltann{i}{j}
+        \begin{bmatrix} K_1 \\ \frac12 Y_1(\tilde\eta) \end{bmatrix}, \label{eq:kgf:boundary_u1t}\\
+    \begin{bmatrix} u_{jH1} \\ u_{jK1} \end{bmatrix} n_j = 0, \label{eq:kgf:boundary_u1n}\\
+    \frac{p_{H0}}{T_{B0}}\begin{bmatrix} T_{H1} - T_{B1} \\ T_{K1} \\ T_{B0}^2\rho_{K1} \end{bmatrix} =
+        \onwall{\pder[T_{H0}]{x_j}} n_j
+        \begin{bmatrix} d_1 \\ \Theta_1(\tilde\eta) \\ p_{H0}\Omega_1(\tilde\eta) \end{bmatrix}, \label{eq:kgf:boundary_T1}
+\end{gather}
+где \(\tilde\eta = \eta p_{H0}/T_{B0}\).
+Неоднородное уравнение~\eqref{eq:knlayer2} приводит к следующим
+граничным условиям и поправкам кнудсеновского слоя:
+\begin{gather}
+    \begin{aligned}
+        \frac1{\sqrt{T_{B0}}}
+            \begin{bmatrix} (u_{jH2} - u_{Bj2}) \\ u_{jK2} \end{bmatrix}\deltann{i}{j} =
+        &- \frac{\sqrt{T_{B0}}}{p_{H0}}\onwall{\pder[u_{jH1}]{x_k}} \deltann{i}{j}n_k
+            \begin{bmatrix} k_0 \\ Y_0(\tilde\eta) \end{bmatrix} \\
+        - \frac{T_{B0}}{p_{H0}}\onwall{\pderder[T_{H0}]{x_j}{x_k}} \deltann{i}{j}n_k
+            \begin{bmatrix} a_4 \\ Y_{a4}(\tilde\eta) \end{bmatrix}
+        &- \bar\kappa\frac{T_{B0}}{p_{H0}}\onwall{\pder[T_{H0}]{x_j}} \deltann{i}{j}
+            \begin{bmatrix} a_5 \\ Y_{a5}(\tilde\eta) \end{bmatrix} \\
+        - \kappa_{jk}\frac{T_{B0}}{p_{H0}}\onwall{\pder[T_{H0}]{x_k}} \deltann{i}{j}
+            \begin{bmatrix} a_6 \\ Y_{a6}(\tilde\eta) \end{bmatrix}
+        &- \pder[T_{B1}]{x_j} \deltann{i}{j}
+            \begin{bmatrix} K_1 \\ \frac12 Y_1(\tilde\eta) \end{bmatrix},
+    \end{aligned}\label{eq:kgf:boundary_u2t}\\
+    \begin{multlined}
+        \frac1{\sqrt{T_{B0}}}
+            \begin{bmatrix} (u_{jH2} - u_{Bj2}) \\ u_{jK2} \end{bmatrix} n_j = \\
+        - \frac{T_{B0}}{p_{H0}}\left[ \onwall{\pderder[T_{H0}]{x_i}{x_j}}n_i n_j
+            + 2\bar\kappa\onwall{\pder[T_{H0}]{x_i}}n_i \right]
+            \begin{bmatrix} \frac12\int_0^\infty Y_1(\eta_0)\dd\eta_0 \\
+                \frac12\int_\infty^{\tilde\eta} Y_1(\eta_0)\dd\eta_0 \end{bmatrix},
+    \end{multlined}\label{eq:kgf:boundary_u2n}\\
+    \begin{multlined}
+        \frac{p_{H0}}{T_{B0}}
+            \begin{bmatrix} T_{H2} - T_{B2} \\ T_{K2} \\ T_{B0}^2\rho_{K2} \end{bmatrix} =
+        \onwall{\pder[T_{H1}]{x_j}} n_j
+            \begin{bmatrix} d_1 \\ \Theta_1(\tilde\eta) \\ p_{H0}\Omega_1(\tilde\eta) \end{bmatrix} \\
+        + \frac{T_{B0}}{p_{H0}}\onwall{\pderder[T_{H0}]{x_i}{x_j}} n_i n_j
+            \begin{bmatrix} d_3 \\ \Theta_3(\tilde\eta) \\ p_{H0}\Omega_3(\tilde\eta) \end{bmatrix}
+        + \bar\kappa\frac{T_{B0}}{p_{H0}}\onwall{\pder[T_{H0}]{x_i}} n_i
+            \begin{bmatrix} d_5 \\ \Theta_5(\tilde\eta) \\ p_{H0}\Omega_5(\tilde\eta) \end{bmatrix},
+    \end{multlined}\label{eq:kgf:boundary_T2}
+\end{gather}
+где \(\bar\kappa/L = (\kappa_1+\kappa_2)/2L\) "--- средняя кривизна граничной поверхности,
+главные кривизны \(\kappa_1/L\), \(\kappa_2/L\) принимают отрицательные значения,
+когда центр соответствующей кривизны лежит со стороны газа.
+Безразмерный тензор кривизны \(\kappa_{ij} = \kappa_1 l_i l_j + \kappa_2 m_i m_j\)
+выражается через единичные векторы соответствующих главных направлений \(l_i\) и \(m_i\).
+
+Коэффициент \(a_4\) соответствует термострессовому скольжению второго порядка.
+Для газа твёрдых сфер~\cite{Ohwada1992, Takata2015}
+\begin{equation}\label{eq:a4_coeff}
+    a_4 = 0.0331.
+\end{equation}
+Поскольку \(a_4>0\), имеет место явление отрицательного термофореза~\cite{Ohwada1992}.
+Коэффициенты, стоящие перед \(\bar\kappa\) и \(\kappa_{ij}\),
+вычислены недавно~\cite{Takata2015curvature, Takata2015}:
+\begin{equation}\label{eq:curvature_coeffs}
+    a_5 = 0.23353, \quad a_6 = -1.99878, \quad d_3 = 0.4993, \quad d_5 = 4.6180.
+\end{equation}
+Функции \(Y_{a4}(\eta)\), \(Y_{a5}(\eta)\), \(Y_{a6}(\eta)\), \(\Theta_3(\eta)\),
+\(\Omega_3(\eta)\), \(\Theta_5(\eta)\), \(\Omega_5(\eta)\) убывают также экспоненциально от \(\eta\)
+и табулированы в~\cite{Ohwada1992, Sone2002, Sone2007, Takata2015curvature, Takata2015}.
+
+Последние два члена в~\eqref{eq:knlayer2} приводят к дополнительным нелинейным слагаемым
+в~\eqref{eq:kgf:boundary_u2t} и~\eqref{eq:kgf:boundary_T2}:
+\begin{equation}\label{eq:boundary_nonlinear}
+    \frac1{p_{H0}^2}\onwall{\pder[T_{H0}]{x_j}\deltann{i}{j}}\onwall{\pder[T_{H0}]{x_k}n_k}, \quad
+    \frac1{p_{H0}^2}\onwall{\pder[T_{H0}]{x_i}n_i}^2,
+\end{equation}
+однако полное решение этой неоднородной задачи кнудсеновского слоя для газа твёрдых сфер в литературе не представлено.
+Для модельного уравнения Крука"--~Веландера численный анализ второго слагаемого выполнен в~\cite{Sone1970}.
+
+\subsection{Использование граничных условий старшего порядка}
+
+Уравнения следующего порядка для \(T_{H1}\), \(v_{iH2}\) и \(p_{H3}\) громоздки,
+и до настоящего времени не были получены в общей форме для произвольного молекулярного потенциала.
+Поэтому численный анализ медленных течений слаборазреженного газа обычно ведут
+на основе уравнений КГФ~\eqref{eq:kgf:asymptotic1_u},~\eqref{eq:kgf:asymptotic1_T},~\eqref{eq:kgf:asymptotic2_p}
+с граничными условиями~\eqref{eq:kgf:boundary_T0},~\eqref{eq:kgf:boundary_u1t},~\eqref{eq:kgf:boundary_u1n}.
+Однако асимптотическое решение можно улучшить,
+если привнести в него известные граничные условия следующего порядка.
+Например, можно вычислить температурное поле \(T_H = T_{H0} + T_{H1}k + \OO{k^2}\) из уравнения
+\begin{equation}\label{eq:asymptotic_T}
+    \frac1k\pder[u_{iH}]{x_i} = \frac12\pder{x_i}\left(\Gamma_2\pder[T_H]{x_i}\right) + \OO{k^2},
+\end{equation}
+получаемого из~\eqref{eq:kgf:asymptotic1_T} и~\eqref{eq:kgf:asymptotic2_T},
+при граничном условии
+\begin{equation}\label{eq:kgf:boundary_T}
+    T_H = T_B + d_1\frac{T_{B0}}{p_{H0}}\onwall{\pder[T_H]{x_j}}n_j k + \OO{k^2},
+\end{equation}
+получаемого из~\eqref{eq:kgf:boundary_T0} и~\eqref{eq:kgf:boundary_T1}.
+Поскольку \(u_{iH2}\) неизвестно, то температурное поле \(T_H\) вычисляется с точностью \(\OO{k}\),
+однако на границе с точностью \(\OO{k^2}\).
+В~\eqref{eq:kgf:boundary_T} вместо \(\Pder[T_{H0}]{x_j}\) используется производная от \(T_H\),
+что позволяет учесть температурный скачок в граничном условии следующего порядка.
+Аналогично можно учесть скоростной скачок на границе:
+\begin{equation}\label{eq:boundary_u}
+    u_{iH} = u_{Bi1}k - \left[ K_1\sqrt{T_{B0}}\onwall{\pder[T_{H0}]{x_j}}
+        + k_0\frac{T_{B0}}{p_{H0}}\onwall{\pder[u_{jH}]{x_k}}n_k \right] \deltann{i}{j}k + \OO{k^2}.
+\end{equation}
+Таким же образом в граничные условия могут быть включены члены
+из~\eqref{eq:kgf:boundary_u2t} и~\eqref{eq:kgf:boundary_T2},
+содержащие вторую производную от \(T_{H0}\), а также \(\bar\kappa\), \(\kappa_{ij}\).
+Граничное условие на нормальную компоненту скорости~\eqref{eq:kgf:boundary_u2n}
+несовместимо с уравнением~\eqref{eq:kgf:asymptotic1_u}, поэтому не используется.
+
+Поля \(T_H\) и \(u_{iH}\), полученные вышеописанным способом,
+качественно лучше описывают поведение разреженного газа,
+поскольку учитывают дополнительные граничные эффекты.
+Можно также надеяться, что они количественно лучше аппроксимируют точное решение.
+
+Для вычисления второй производной вдоль нормали от \(T_{H0}\)
+удобно воспользоваться преобразованием~\eqref{eq:kgf:asymptotic1_T} и~\eqref{eq:kgf:boundary_u1t}:
+\begin{multline*}
+    \pderder[T_{H0}]{x_i}{x_j}n_i n_j + 2\bar\kappa\pder[T_{H0}]{x_i}n_i =
+        - \pderdual[T_{H0}]{\chi_\alpha} + \pderdual[T_{H0}]{x_k} = \\
+    - \pderdual[T_{H0}]{\chi_\alpha} - \frac1{\Gamma_2} \left[
+        \Gamma_2'\left(\pder[T_{H0}]{x_i}n_i\right)^2 +
+        \left(\Gamma_2'+\frac{2K_1}{\sqrt{T_{H0}}}\right) \left(\pder[T_{H0}]{\chi_\alpha}\right)^2
+    \right],
+\end{multline*}
+где подразумевается суммирование по парам повторяющихся индексов \(\alpha=1,2\),
+а также \(|\Pder[\chi_\alpha]{x_i}| = 1\).
+
+\subsubsection{Силы, действующие на обтекаемые тела}
+
+Вследствие неоднородных напряжений в газе, возникает сила второго порядка по \(k\),
+действующая на единицу площади обтекаемого тела \(F_{iH2} = -p_{ijH2}n_j\)
+С помощью формулы Остроградского"--~Гаусса член второго порядка по \(k\) в~\eqref{eq:kgf:stress}
+может быть преобразован во время интегрирования по поверхности тела:
+\begin{align*}
+    \oint_S \Gamma_3\pderder[T_{H0}]{x_i}{x_j} &n_j\dd{S}
+         = \oint_S \pder{x_i} \left( \Gamma_3\pder[T_{H0}]{x_j} \right) n_j\dd{S}
+        - \oint_S \Gamma_3'\pder[T_{H0}]{x_i}\pder[T_{H0}]{x_j} n_j\dd{S} \\
+        &= \int_V \pder{x_i}\pder{x_j} \left( \Gamma_3 \pder[T_{H0}]{x_j} \right) \dd{V}
+        - \oint_S \Gamma_3'\pder[T_{H0}]{x_i}\pder[T_{H0}]{x_j} n_j\dd{S} \\
+        &= \oint_S \Gamma_3'\left(\pder[T_{H0}]{x_j}\right)^2 n_i\dd{S}
+        + \oint_S \Gamma_3\pderdual[T_{H0}]{x_j} n_i\dd{S}
+        - \oint_S \Gamma_3'\pder[T_{H0}]{x_i}\pder[T_{H0}]{x_j} n_j\dd{S},
+\end{align*}
+где интегрирование производится по всему объему тела \(V\) и всей его поверхности \(S\).
+Один из вязкостных членов может быть также преобразован аналогичным образом:
+\begin{multline*}
+    \oint_S \Gamma_1\pder[u_{jH1}]{x_i} n_j\dd{S}
+        = \oint_S \pder{x_i} \left( \Gamma_1 u_{jH1} \right) n_j\dd{S} \\
+        = \int_V \pder{x_i}\pder{x_j} \left( \Gamma_1 u_{jH1} \right) \dd{V}
+        = \oint_S \left( \Gamma_1 + \Gamma_1'T_{H0} \right) \pder[u_{jH1}]{x_j} n_i\dd{S}.
+\end{multline*}
+Здесь использовано граничное условие~\eqref{eq:kgf:boundary_u1n} и уравнение непрерывности~\eqref{eq:kgf:asymptotic1_u}.
+
+Таким образом, полная сила, действующая на обтекаемое тело,
+\begin{align}\label{eq:kgf:force_general}
+    p_{H0} \oint_S F_{i2} \dd{S} =
+        &- \oint_S p_{H2}^\dag n_i \dd{S} \notag\\
+        &+ \oint_S \left( \Gamma_1 + \Gamma_1'T_{H0} \right) \pder[u_{jH1}]{x_j} n_i \dd{S}
+        +  \oint_S \Gamma_1 \pder[u_{iH1}]{x_j} n_j \dd{S} \notag\\
+        &- \oint_S \frac{\Gamma_7}2\left(\pder[T_{H0}]{x_j}\right)^2 n_i \dd{S}
+        +  \oint_S \Gamma_7\pder[T_{H0}]{x_i}\pder[T_{H0}]{x_j} n_j \dd{S}.
+\end{align}
+В частности, если тело равномерно нагрето (\(\Pder[T_B]{x_i}=0\)) и покоится (\(u_{Bi}=0\)),
+то на него действует сила, состоящая из трёх компонент,
+\begin{equation}\label{eq:kgf:force}
+    p_{H0} \oint_S F_{i2} \dd{S} =
+        - \oint_S p_{H2}^\dag n_i \dd{S} \\
+        + \oint_S \Gamma_1\pder[u_{iH1}]{x_j} n_j \dd{S}
+        + \oint_S \frac{\Gamma_7}2\left(\pder[T_{H0}]{x_j}\right)^2 n_i \dd{S}.
+\end{equation}
+Поправка слоя Кнудсена исключена из рассмотрения, поскольку вносит нулевой вклад в значение полной силы.
+Это легко доказывается, сдвигая область интегрирования за пределы слоя Кнудсена.
+
+\subsection{Одномерные течения при конечных чисел Маха}
+
+Как было указано выше, построение асимптотического решения при конечных числах Маха в общем случае
+дополнительно требует сращивания вязких пограничных слоёв с решением уравений Эйлера.
+Рассмотрение одномерных течений, описываемых уравнением
+\begin{equation}\label{eq:1d}
+    \zeta_y\pder[f]{y} = \frac1kJ(f,f), \quad \int\zeta_yf\dzeta = \int\zeta_zf\dzeta = 0,
+\end{equation}
+в этом смысле существенно проще, поскольку вырождаются
+\begin{itemize}
+    \item члены, содержащие кривизну слоя Прандтля,
+    \item область невязкого течения.
+\end{itemize}
+
+Вплоть до членов второго порядка по \(k\) гидродинамическая часть решения одномерных задач
+совпадает с уравнениями Навье"--~Стокса
+\begin{gather}
+    \der{y}\left(\Gamma_1\der[v_H]{y}\right) = \OO{k^2}, \label{eq:1d:asymptotic_v}\\
+    \Gamma_1\left(\der[v_H]{y}\right)^2
+        + \frac54\der{y}\left(\Gamma_2\der[T_H]{y}\right) = \OO{k^2}. \label{eq:1d:asymptotic_T}
+\end{gather}
+Рассмотрим частный случай, когда газ окружён двумя параллельными пластинами \(y=\pm1/2\).
+Тогда нелинейные граничные условия скольжения на верхней пластине (\(y=1/2\)) примут вид
+\begin{gather}
+    v_H = v_B + k_0\frac{T_H}{p_H}\der[v_H]{y}k + \OO{k^2}, \label{eq:1d:boundary_v}\\
+    T_H = T_B - d_1\frac{T_H}{p_H}\der[T_H]{y}k + \OO{k^2}. \label{eq:1d:boundary_T}
+\end{gather}
+
+Для нормированной плотности газа
+\begin{equation}\label{eq:1d:total_mass}
+    \int_{-\frac12}^\frac12\rho\dd{y} = 1
+\end{equation}
+можно вычислить давление
+\begin{equation}\label{eq:1d:pH}
+    p_H = \left(\int_{-\frac12}^\frac12\frac{\dd y}{T_0}\right)^{-1} + \OO{k^2},
+\end{equation}
+подставляя \(\rho = \rho_H + \rho_{K1}k + \OO{k^2}\) и \(p_H = \rho_H T_H\) в~\eqref{eq:1d:total_mass}.
+Поскольку \(\int_{0}^{1/2}\rho_{K1}\dd{y} = \OO{k}\), \(\rho_{K1}\) не фигурирует в~\eqref{eq:1d:pH}.
+Гидродинамическое давление второго порядка может быть вычислено из уравнения
+\begin{equation}\label{eq:1d:pH2}
+    \frac{3p_H}{2}\der[p_{H2}]{y}
+        + \der{y}\left[ \Gamma_3\derdual[T_H]{y} + \Gamma_7\left(\der[T_H]{y}\right)^2 \\
+            + (\Gamma_8-2\Gamma_9)\left(\der[v_H]{y}\right)^2 \right] = \OO{k}.
+\end{equation}
+
+Если на плоскости \(y=0\) наложить антисимметричное граничное условие
+\begin{equation}\label{eq:1d:antisymmetry}
+    f(\zeta_x,\zeta_y,\zeta_z) = f(-\zeta_x,-\zeta_y,\zeta_z), \quad \zeta_y>0,
+\end{equation}
+то мы получим классическую задачу \emph{плоского течения Куэтта},
+для которой справедливо следующее асимптотическое решение
+\begin{gather}
+    v = v_H - \frac{Y_0^--Y_0^+}{p_H}\left(T_H\pder[v_H]{y}\right)_{y=\frac12}k + \OO{k^2}, \label{eq:Hilbert_U}\\
+    T = T_H - \frac{\Theta_1^-+\Theta_1^+}{p_H}\left(T_H\pder[T_H]{y}\right)_{y=\frac12}k + \OO{k^2}, \label{eq:Hilbert_T}\\
+    p_{xy} = -\Gamma_1\pder[v_H]{y}k + \OO{k^3}, \label{eq:Hilbert_Pxy}\\
+    \begin{aligned}
+        q_x = (H_A^--H_A^+)&\left(T_H\pder[v_H]{y}\right)_{y=\frac12}k + q_{xK2}k^2 \\
+        &+ \frac{T_H}{p_H}\left( \frac{\Gamma_3}2 \pderdual[v_H]{y}
+            + 4\Gamma_{10} \pder[T_H]{y}\pder[v_H]{y} \right)k^2 + \OO{k^3},
+    \end{aligned}\label{eq:Hilbert_Qx}\\
+    q_y = -\frac54\Gamma_2\pder[T_H]{y}k + q_{yK2}k^2 + \OO{k^3}, \label{eq:Hilbert_Qy}\\
+    p = p_H - \mathcal{P}_\eta k + (p_{H2} + p_{K2})k^2 + \OO{k^3}, \label{eq:Hilbert_p}\\
+    p_{xx} - p = -\frac12 \mathcal{P}_\eta k
+        + \big[ 2(\Gamma_8+\Gamma_9)\mathcal{P}_u - \mathcal{P}_T + p_{xxK2}-p_{K2}\big]k^2
+        + \OO{k^3}, \label{eq:Hilbert_Pxx}\\
+    p_{yy} - p = \mathcal{P}_\eta k
+        + \big[ 2(\Gamma_8-2\Gamma_9)\mathcal{P}_u + 2\mathcal{P}_T + p_{yyK2}-p_{K2} \big]k^2
+        + \OO{k^3}, \label{eq:Hilbert_Pyy}\\
+    p_{zz} - p = -\frac12 \mathcal{P}_\eta k
+        + \big[ 2(\Gamma_9-2\Gamma_8)\mathcal{P}_u - \mathcal{P}_T + p_{zzK2}-p_{K2} \big]k^2
+        + \OO{k^3}, \label{eq:Hilbert_Pzz}
+\end{gather}
+где
+\begin{gather}\label{eq:mathcal_P_def}
+    \mathcal{P}_\eta = \left(\Omega_1^-+\Omega_1^++\Theta_1^-+\Theta_1^+\right)
+        \left(\pder[T_0]{y}\right)_{y=\frac12}, \\
+    \mathcal{P}_T = \frac1{3p_H}\left[\Gamma_3 \pderdual[T_H]{y} + \Gamma_7\left(\pder[T_H]{y}\right)^2\right], \quad
+    \mathcal{P}_u = \frac1{3p_H}\left(\pder[v_H]{y}\right)^2,
+\end{gather}
+величины в скобках с индексом \(y=1/2\) вычисляются на соответствующей границе.
+Функции кнудсеновского слоя \(K^\pm = Y_0^\pm, \Theta_1^\pm, H_A^\pm, \Omega_1^\pm\) определены как
+\begin{equation}\label{eq:nonlinear_knudsen_functions}
+     K^\pm = K\left(\frac{p_0}{T_0}\eta_\pm\right), \quad \eta_\pm = \frac{1 \mp 2y}{2k}.
+\end{equation}
+
+Для степенного потенциала
+\begin{equation}\label{eq:gammas_nonlinear}
+    \Gamma_8 = \gamma_8 T^{2s},
+        \quad \Gamma_9 = \gamma_9 T^{2s},
+        \quad \Gamma_{10} = \gamma_{10} T^{2s-1},
+\end{equation}
+а для модели твёрдых сфер
+\begin{equation}\label{eq:gammas_nonlinear_hs}
+    \gamma_8 = 1.495941968, \quad \gamma_9 = 1.636073459, \quad \gamma_{10} = 2.449780.
+\end{equation}
+Алгоритм вычисления транспортных коэффициентов~\eqref{eq:gammas_nonlinear_hs} через приближённое решение
+соответствующих интегральных уравнений изложен в приложении~\ref{app:gammas}.
 
 \clearpage
