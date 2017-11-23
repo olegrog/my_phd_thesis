@@ -37,6 +37,7 @@
 \newcommand{\fullbibtitle}{Список литературы} % (ГОСТ Р 7.0.11-2011, 4)
 
 % математические сокращения
+\DeclareMathOperator{\spann}{span}
 \newcommand{\Kn}{\mathrm{Kn}}
 \newcommand{\Ma}{\mathrm{Ma}}
 \newcommand{\NS}{N\!S}
@@ -54,7 +55,10 @@
 \newcommand{\bzeta}{{\boldsymbol{\zeta}}}
 \newcommand{\dx}{\boldsymbol{\dd{x}}}
 \newcommand{\bx}{{\boldsymbol{x}}}
+\newcommand{\by}{{\boldsymbol{y}}}
 \newcommand{\bv}{{\boldsymbol{v}}}
+\newcommand{\bh}{{\boldsymbol{h}}}
+\newcommand{\be}{\boldsymbol{e}}
 \newcommand{\Nu}{\mathcal{N}}
 \newcommand{\Mu}{\mathcal{M}}
 \newcommand{\OO}[1]{O(#1)}
@@ -63,12 +67,12 @@
 \newcommand{\deltann}[2]{(\delta_{#1#2}-n_#1 n_#2)}
 \newcommand{\Set}[2]{\{\,{#1}:{#2}\,\}}
 \newcommand{\inner}[2]{\left\langle{#1},{#2}\right\rangle}
-\newcommand{\eqdef}{\overset{\mathrm{def}}{=\joinrel=}}
+\newcommand{\eqdef}{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+% {\overset{\mathrm{def}}{=\joinrel=}}
 
 % use Russian tradition
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
-\renewcommand{\sigma}{\varsigma}
 
 \newcommand{\muHS}{\hat{\mu}_{\mathrm{HS}}}
 \newcommand{\QHS}{\hat{Q}_{\mathrm{HS}}}
