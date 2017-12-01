@@ -73,16 +73,21 @@
 % use Russian tradition
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\kappa}{\varkappa}
 
 \newcommand{\muHS}{\hat{\mu}_{\mathrm{HS}}}
 \newcommand{\QHS}{\hat{Q}_{\mathrm{HS}}}
 
 % математические сокращения для приложения
-\newcommand{\BB}{\ensuremath{\mathcal{B}^{(4)}}}
+\newcommand{\bxi}{{\boldsymbol{\xi}}}
+\newcommand{\dxi}{\boldsymbol{\dd\xi}}
+\newcommand{\B}{\ensuremath{\mathcal{B}^{(4)}}}
 \newcommand{\Q}{\ensuremath{\mathcal{Q}^{(0)}}}
-\newcommand{\Tn}[1]{\ensuremath{\mathcal{T}^{(#1)}}}
+\newcommand{\T}[1]{\ensuremath{\mathcal{T}^{(#1)}}}
 \newcommand{\TT}{\ensuremath{\tilde{\mathcal{T}}^{(0)}}}
 \newcommand{\QQ}{\ensuremath{\tilde{\mathcal{Q}}^{(0)}}}
+\newcommand{\IF}[2][0]{\ensuremath{I{#2}^{(#1)}}}
+\newcommand{\IFF}[1]{\ensuremath{I\tilde{#1}^{(0)}}}
 \newcommand{\ZD}[2]{\zeta_{#1}\delta_{#2}}
 \newcommand{\ZZD}[3]{\zeta_{#1}\zeta_{#2}\delta_{#3}}
 \newcommand{\Z}{\zeta_i}
@@ -90,6 +95,8 @@
 \newcommand{\ZZZ}{\zeta_i\zeta_j\zeta_k}
 \newcommand{\ZZZZ}{\zeta_i\zeta_j\zeta_k\zeta_l}
 \newcommand{\DD}[2]{\delta_{#1}\delta_{#2}}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\erf}{erf}
 
 % gnuplot 5+ default colors
 \definecolor{gnuplot1}{HTML}{9400d3}
@@ -101,3 +108,5 @@
 \definecolor{gnuplot7}{HTML}{e51e10}
 % gnuplot markers
 \pgfdeclareplotmark{star9}{\pgfuseplotmark{+}\pgftransformscale{1.5}\pgfuseplotmark{x}}
+% tikz parameters
+\newcommand{\mytikzscale}{1.5}

@@ -214,8 +214,8 @@
 \end{equation*}
 строится численная схема решения задачи Коши
 \begin{equation*}
-    \hat{f}_\gamma^{n+j/N} = \hat{f}_\gamma^{n+(j-1)/N} + \frac{\tau}{N}\hat{\Delta}_{\gamma}^{n+(j-1)/N}
-    \quad (j = 1,\dotsc,N), \quad \tau = t_{n+1}-t_n.
+    \hat{f}_\gamma^{n+j/N} = \hat{f}_\gamma^{n+(j-1)/N} + \frac{\Delta{t}}{N}\hat{\Delta}_{\gamma}^{n+(j-1)/N}
+    \quad (j = 1,\dotsc,N), \quad \Delta{t} = t_{n+1}-t_n.
 \end{equation*}
 Каждый дробный шаг сохраняет массу, импульс, кинетическую энергию и не уменьшает энтропию
 при сохранении \emph{положительности}.
@@ -229,7 +229,7 @@
 \end{equation*}
 где
 \begin{gather*}
-    A = \frac{\pi\tau V_\Gamma^2 N B_{\max}}{\sum_{\nu\in\Nu} w_{\alpha_\nu}w_{\beta_\nu}}, \quad
+    A = \frac{\pi\Delta{t} V_\Gamma^2 N B_{\max}}{\sum_{\nu\in\Nu} w_{\alpha_\nu}w_{\beta_\nu}}, \quad
     B_{\max} = \max_{\substack{\gamma,\sigma\in\Gamma\\\boldsymbol{\alpha}\in S^2}}
         B(\boldsymbol{\alpha}, \bzeta_{\gamma}, \bzeta_{\sigma}) = \OO{\zeta_{\max}}, \quad
     \zeta_{\max} = \max_{\gamma\in\Gamma}|\bzeta_\gamma|, \\
@@ -316,10 +316,10 @@
 
 \begin{figure}
     \centering
-    \subbottom{%
+    \subbottom[продольный поток тепла]{%
         \includegraphics[width=.48\linewidth]{couette/profiles/qx}
         \label{fig:couette:profiles:qx}}
-    \subbottom{%
+    \subbottom[\(2\int(\zeta_z^2-\zeta_y^2)f\dzeta\)]{%
         \includegraphics[width=.48\linewidth]{couette/profiles/Pzz}
         \label{fig:couette:profiles:Pzz}}
     \caption{Профили некоторых моментов функции распределения.}
@@ -351,7 +351,7 @@
 Вычисляются профили первых тринадцати моментов функции распределения для различных чисел Кнудсена и Маха.
 На рис.~\ref{fig:couette:profiles:qx} показано, как кривизна профиля продольного теплового потока
 меняет знак по мере роста числа Маха. Рис.~\ref{fig:couette:profiles:Pzz}
-демонстрирует степень анизотропичности тензора давлений \(P_{ij}\).
+демонстрирует степень анизотропичности тензора давлений.
 На рис.~\ref{fig:couette:shear} проводится сравнение полученных результатов с другими методами.
 Все данные согласуются между собой в пределах точности
 (положения~\ref{defpos:Couette_flow} и~\ref{defpos:asymptotic_verification}).
@@ -495,7 +495,8 @@
     \subbottom[уравнение Больцмана]{%
         \includegraphics[width=.9\textwidth]{{{snit/elliptic/kes-0.02-flow}}}
         \label{fig:elliptic:flow:boltzmann}}
-    \caption{Стационарное поле скоростей при \(\Kn=0.02\); изолинии соответствуют модулю.}
+    \caption{Стационарное поле скоростей при \(\Kn=0.02\):
+        изолинии соответствуют модулю, кривые со стрелками изображают направление.}
     \label{fig:elliptic:flow}
 \end{figure}
 

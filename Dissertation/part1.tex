@@ -432,9 +432,9 @@
 
 Методы численного анализа и асимптотическая теория уравнения Больцмана тесно связаны
 с математической теорией задачи Коши.
-Строгий анализ краевых задач преставляет существенные трудности, поэтому в текущем разделе
-известные результаты ограничены постановкой в бесконечном физическом пространстве \(\Omega=\mathbb{R}^3\)
-и торе \(\Omega=\mathbb{T}^3\)
+Строгий анализ краевых задач представляет существенные трудности, поэтому в текущем разделе
+представлены известные результаты прежде всего для однородной в физическом пространстве задачи,
+а также для бесконечного пространства \(\Omega=\mathbb{R}^d\) и тора \(\Omega=\mathbb{T}^d\).
 
 \subsection{Пространственно-однородная задача}
 
@@ -816,6 +816,7 @@
 Кинетическая теория ударных волн развита только для малых амплитуд.
 Для жёстких короткодействующих потенциалов ударный профиль впервые был построен Р.~Кафлишем и Б.~Николаенко~\cite{Caflisch1982}.
 Его стабильность, позитивность~\cite{Liu2004} и монотонность~\cite{Liu2013} была показана Тай-Пин~Лю и Ши-Сянь.~Ю.
+
 \subsection{Слабовозмущённые течения}
 
 Рассмотрим слаборазреженный газ, описываемый стационарным линеаризованным уравнением Больцмана~\eqref{eq:linear_Boltzmann}.
@@ -1346,6 +1347,115 @@
 Поправка слоя Кнудсена исключена из рассмотрения, поскольку вносит нулевой вклад в значение полной силы.
 Это легко доказывается, сдвигая область интегрирования за пределы слоя Кнудсена.
 
+\subsubsection{Электростатическая аналогия}
+
+\begin{figure}[ht]
+    \centering
+    \subbottom[газ твёрдых сфер: \(s_2=1/2\) и \(s_7=0\).
+        Асимптоты: \(\frac34\tau^2\),~\(\tau\to0\) и \(\tau^2\),~\(\tau\to\infty\)]{%
+        \centering
+        \begin{tikzpicture}
+            \begin{loglogaxis}[
+                xlabel=\(\tau\),
+                ylabel=\(F\)]
+                \addplot gnuplot [raw gnuplot, mark=none, color=blue, thick]{
+                    set logscale xy;
+                    set xrange [1e-2:1e3];
+                    plot ((x+1)**.5-1)*((x+1)**1.5-1);
+                };
+                \addplot gnuplot [raw gnuplot, mark=none, color=black, very thin, dashed]{
+                    set xrange [1e0:1e3];
+                    plot x**2;
+                };
+                \addplot gnuplot [raw gnuplot, mark=none, color=black, very thin, dashed]{
+                    set xrange [1e-2:1e+2];
+                    plot 3./4*x**2;
+                };
+            \end{loglogaxis}
+        \end{tikzpicture}
+        \label{fig:snit_force:hs}}
+    \subbottom[максвелловские молекулы или модель БГК: \(s_2=1\) и \(s_7=1\).
+        Асимптоты: \(2\tau^2\),~\(\tau\to0\) и \(\tau^3\),~\(\tau\to\infty\)]{%
+        \centering
+        \begin{tikzpicture}
+            \begin{loglogaxis}[
+                xlabel=\(\tau\),
+                ylabel=\(F\)]
+                \addplot gnuplot [raw gnuplot, mark=none, color=blue, thick]{
+                    set logscale xy;
+                    set xrange [1e-2:1e3];
+                    plot ((x+1)**1-1)*((x+1)**2-1);
+                };
+                \addplot gnuplot [raw gnuplot, mark=none, color=black, very thin, dashed]{
+                    set samples 2;
+                    set xrange [1e0:1e3];
+                    plot x**3;
+                };
+                \addplot gnuplot [raw gnuplot, mark=none, color=black, very thin, dashed]{
+                    set samples 2;
+                    set xrange [1e-2:1e+1];
+                    plot 2*x**2;
+                };
+            \end{loglogaxis}
+        \end{tikzpicture}
+        \label{fig:snit_force:maxwell}}
+    \caption{Зависимость силы притяжения двух тел \(F\) от разности температур \(\tau=T_2-T_1\) при \(T_1=1\).
+        Тонкие пунктирные линии соответствуют асимптотам.}
+    \label{fig:snit_force}
+\end{figure}
+
+Сила взаимодействия между равномерно нагретыми телами оказывается подобна электростатической.
+Впервые на это обратили внимание М.\,Н.~Коган, В.\,С.~Галкин и О.\,Г.~Фридлендер,
+рассмотрев линейное приближение~\cite{Kogan1976}.
+Их результат можно естественным образом обобщить в нелинейной постановке.
+
+Если ограничится рассмотрением степенного потенциала,
+то коэффициент теплопроводности \(\Gamma_2\propto T^s\) (см.~\eqref{eq:kgf:Gammas}),
+а соответствующее уравнение теплопроводности нелинейно,
+которое, однако, является линейным уравнением Лапласа для \(T^{1+s}\).
+Здесь и далее мы для простоты предполагаем \(s>0\).
+В соответствии с электростатической теорией можно ввести аналог заряда
+\begin{equation}\label{eq:charge_ell}
+    e_a \eqdef T_a^s \oint_{S_a} \pder[T]{x_i}n_i\dd{S} = C'_{ab} T_b^{1+s}, \quad \sum_a e_a = 0.
+\end{equation}
+\(T^{1+s}\) можно считать потенциалом, \(C_{aa}\) коэффициентами ёмкости,
+а \(C_{ab}\,(a\neq b)\) коэффициентами электростатической индукции.
+Несложно также построить аналог энергии
+\begin{equation}\label{eq:energy_ell}
+    U \eqdef \int \left[ \frac{\Gamma_7(T)}2\left(\pder[T]{x_i}\right)^2 - p \right]\dd{V} =
+    \gamma_7 \sum_a T_a^{2s} \oint_{S_a} \pder[T]{x_i}n_i\dd{S} =
+    C_{ab} T_a^s T_b^{1+s},
+\end{equation}
+тогда действующая сила находится как вариационная производная
+\begin{equation}\label{eq:force_ell}
+    F^a_i = \left(\varder[U]{r^a_i}\right)_T = \pder[C_{ab}]{r^a_i} T_a^s T_b^{1+s}.
+\end{equation}
+В частности, для двух тел с температурами \(T_1\) и \(T_2\) можно записать
+\begin{gather}
+    e = C \left( T_2^{1+s} - T_1^{1+s} \right), \label{eq:charge_2bodies}\\
+    U = C \left( T_2^s - T_1^s \right)\left( T_2^{1+s} - T_1^{1+s} \right), \label{eq:energy_2bodies}\\
+    F_i = \pder[C]{r^a_i} \left( T_2^s - T_1^s \right)\left( T_2^{1+s} - T_1^{1+s} \right), \label{eq:force_2bodies}
+\end{gather}
+поскольку \(e_1+e_2=0\) и \(e_1=e_2=0\) при \(T_1=T_2\). \(C\) "--- аналог электростатической ёмкости.
+При \(T=1+o(1)\) задача сводится к линейной, где сила притяжения \(F \propto (T_2-T_1)^2\).
+На рис.~\ref{fig:snit_force} показаны соответствующие зависимости для некоторых частных случаев.
+
+\subsubsection{Континуальный предел}
+
+В классической гидродинамике уравнения Навье"--~Стокса (\(\Gamma_7=0\))
+с неподвижными границами (\(v_{Bi}=0\)) и условиями без скольжения (\(K_1=0\))
+приводят к нулевому полю \(v_{iH1}=0\) и к уравнению теплопроводности
+\begin{equation}\label{eq:heat_equation}
+    \pder{x_i}\left(\sqrt{T_{H0}}\pder[T_{H0}]{x_i}\right) = 0.
+\end{equation}
+В общем случае корректное распределение температур в континуальном пределе (\(k\to0\))
+находится из уравнений КГФ с соответствующими граничными условиями.
+Оно будет совпадать с решением~\eqref{eq:heat_equation} только для узкого класса задач, где \(v_{iH1}=0\).
+
+В континуальном мире (\(k=0\)) не существует величин \(u_{iH1}\) и \(p_{H2}^\dag\),
+тем не менее инфинитезимальное поле скоростей \(v_i\) конечным образом влияет на \(T\).
+Такое асимптотическое поведение получило название призрак"=эффекта (ghost effect)~\cite{Sone2002, Sone2007}.
+
 \subsection{Одномерные течения при конечных чисел Маха}
 
 Как было указано выше, построение асимптотического решения при конечных числах Маха в общем случае
@@ -1367,69 +1477,60 @@
     \Gamma_1\left(\der[v_H]{y}\right)^2
         + \frac54\der{y}\left(\Gamma_2\der[T_H]{y}\right) = \OO{k^2}. \label{eq:1d:asymptotic_T}
 \end{gather}
-Рассмотрим частный случай, когда газ окружён двумя параллельными пластинами \(y=\pm1/2\).
-Тогда нелинейные граничные условия скольжения на верхней пластине (\(y=1/2\)) примут вид
-\begin{gather}
-    v_H = v_B + k_0\frac{T_H}{p_H}\der[v_H]{y}k + \OO{k^2}, \label{eq:1d:boundary_v}\\
-    T_H = T_B - d_1\frac{T_H}{p_H}\der[T_H]{y}k + \OO{k^2}. \label{eq:1d:boundary_T}
-\end{gather}
-
-Для нормированной плотности газа
-\begin{equation}\label{eq:1d:total_mass}
-    \int_{-\frac12}^\frac12\rho\dd{y} = 1
-\end{equation}
-можно вычислить давление
+Давление \(p_H\) константно вплоть до второго порядка.
+Если масса газа \(M = \int\rho\dx\) постоянна, то давление \(p_H\) может быть получено из равенства
 \begin{equation}\label{eq:1d:pH}
-    p_H = \left(\int_{-\frac12}^\frac12\frac{\dd y}{T_0}\right)^{-1} + \OO{k^2},
+    p_H \int\frac{\dx}{T_H} = M + \OO{k^2},
 \end{equation}
-подставляя \(\rho = \rho_H + \rho_{K1}k + \OO{k^2}\) и \(p_H = \rho_H T_H\) в~\eqref{eq:1d:total_mass}.
-Поскольку \(\int_{0}^{1/2}\rho_{K1}\dd{y} = \OO{k}\), \(\rho_{K1}\) не фигурирует в~\eqref{eq:1d:pH}.
-Гидродинамическое давление второго порядка может быть вычислено из уравнения
+поскольку \(\rho = \rho_H + \rho_{K1}k + \OO{k^2}\) и \(p_H = \rho_H T_H\).
+\(\rho_{K1}\) не фигурирует в~\eqref{eq:1d:pH}, так как \(\int\rho_{K1}\dx = \OO{k}\).
+Гидродинамическое давление второго порядка \(p_{H2}\) вычисляется из уравнения
 \begin{equation}\label{eq:1d:pH2}
     \frac{3p_H}{2}\der[p_{H2}]{y}
         + \der{y}\left[ \Gamma_3\derdual[T_H]{y} + \Gamma_7\left(\der[T_H]{y}\right)^2 \\
             + (\Gamma_8-2\Gamma_9)\left(\der[v_H]{y}\right)^2 \right] = \OO{k}.
 \end{equation}
 
-Если на плоскости \(y=0\) наложить антисимметричное граничное условие
-\begin{equation}\label{eq:1d:antisymmetry}
-    f(\zeta_x,\zeta_y,\zeta_z) = f(-\zeta_x,-\zeta_y,\zeta_z), \quad \zeta_y>0,
-\end{equation}
-то мы получим классическую задачу \emph{плоского течения Куэтта},
-для которой справедливо следующее асимптотическое решение
+Если газ ограничен неподвижными пластинами с граничными условиями диффузного отражения,
+то справедливо следующее асимптотическое решение
 \begin{gather}
-    v = v_H - \frac{Y_0^--Y_0^+}{p_H}\left(T_H\pder[v_H]{y}\right)_{y=\frac12}k + \OO{k^2}, \label{eq:Hilbert_U}\\
-    T = T_H - \frac{\Theta_1^-+\Theta_1^+}{p_H}\left(T_H\pder[T_H]{y}\right)_{y=\frac12}k + \OO{k^2}, \label{eq:Hilbert_T}\\
-    p_{xy} = -\Gamma_1\pder[v_H]{y}k + \OO{k^3}, \label{eq:Hilbert_Pxy}\\
+    v = v_H - \sum_a\frac{Y_0(\tilde\eta_a)}{p_H}\left(T_H\pder[v_H]{y}\right)_ak + \OO{k^2}, \label{eq:1d:v}\\
+    T = T_H - \sum_a\frac{\Theta_1(\tilde\eta_a)}{p_H}\left(T_H\pder[T_H]{y}\right)_ak + \OO{k^2}, \label{eq:1d:T}\\
+    p_{xy} = -\Gamma_1\pder[v_H]{y}k + \OO{k^3}, \label{eq:1d:p_xy}\\
     \begin{aligned}
-        q_x = (H_A^--H_A^+)&\left(T_H\pder[v_H]{y}\right)_{y=\frac12}k + q_{xK2}k^2 \\
+        q_x = \sum_a H_A(\tilde\eta_a) &\left(T_H\pder[v_H]{y}\right)_ak + q_{xK2}k^2 \\
         &+ \frac{T_H}{p_H}\left( \frac{\Gamma_3}2 \pderdual[v_H]{y}
             + 4\Gamma_{10} \pder[T_H]{y}\pder[v_H]{y} \right)k^2 + \OO{k^3},
-    \end{aligned}\label{eq:Hilbert_Qx}\\
-    q_y = -\frac54\Gamma_2\pder[T_H]{y}k + q_{yK2}k^2 + \OO{k^3}, \label{eq:Hilbert_Qy}\\
-    p = p_H - \mathcal{P}_\eta k + (p_{H2} + p_{K2})k^2 + \OO{k^3}, \label{eq:Hilbert_p}\\
+    \end{aligned}\label{eq:1d:q_x}\\
+    q_y = -\frac54\Gamma_2\pder[T_H]{y}k + q_{yK2}k^2 + \OO{k^3}, \label{eq:1d:q_y}\\
+    p = p_H - \mathcal{P}_\eta k + (p_{H2} + p_{K2})k^2 + \OO{k^3}, \label{eq:1d:p}\\
     p_{xx} - p = -\frac12 \mathcal{P}_\eta k
         + \big[ 2(\Gamma_8+\Gamma_9)\mathcal{P}_u - \mathcal{P}_T + p_{xxK2}-p_{K2}\big]k^2
-        + \OO{k^3}, \label{eq:Hilbert_Pxx}\\
+        + \OO{k^3}, \label{eq:1d:Pxx}\\
     p_{yy} - p = \mathcal{P}_\eta k
         + \big[ 2(\Gamma_8-2\Gamma_9)\mathcal{P}_u + 2\mathcal{P}_T + p_{yyK2}-p_{K2} \big]k^2
-        + \OO{k^3}, \label{eq:Hilbert_Pyy}\\
+        + \OO{k^3}, \label{eq:1d:Pyy}\\
     p_{zz} - p = -\frac12 \mathcal{P}_\eta k
         + \big[ 2(\Gamma_9-2\Gamma_8)\mathcal{P}_u - \mathcal{P}_T + p_{zzK2}-p_{K2} \big]k^2
-        + \OO{k^3}, \label{eq:Hilbert_Pzz}
+        + \OO{k^3}, \label{eq:1d:Pzz}
 \end{gather}
 где
 \begin{gather}\label{eq:mathcal_P_def}
-    \mathcal{P}_\eta = \left(\Omega_1^-+\Omega_1^++\Theta_1^-+\Theta_1^+\right)
-        \left(\pder[T_0]{y}\right)_{y=\frac12}, \\
+    \mathcal{P}_\eta = \sum_a\left(\Omega_1(\tilde\eta_a)+\Theta_1(\tilde\eta_a)\right)\left(\pder[T_H]{y}\right)_a, \\
     \mathcal{P}_T = \frac1{3p_H}\left[\Gamma_3 \pderdual[T_H]{y} + \Gamma_7\left(\pder[T_H]{y}\right)^2\right], \quad
     \mathcal{P}_u = \frac1{3p_H}\left(\pder[v_H]{y}\right)^2,
 \end{gather}
-величины в скобках с индексом \(y=1/2\) вычисляются на соответствующей границе.
-Функции кнудсеновского слоя \(K^\pm = Y_0^\pm, \Theta_1^\pm, H_A^\pm, \Omega_1^\pm\) определены как
-\begin{equation}\label{eq:nonlinear_knudsen_functions}
-     K^\pm = K\left(\frac{p_0}{T_0}\eta_\pm\right), \quad \eta_\pm = \frac{1 \mp 2y}{2k}.
+а граничные условия
+\begin{equation}\label{eq:1d:bc}
+    v_H = v_{Ba} - k_0\frac{T_H}{p_H}\pder[v_H]{y}k + \OO{k^2}, \quad
+    T_H = T_{Ba} + d_1\frac{T_H}{p_H}\pder[T_H]{y}k + \OO{k^2}.
 \end{equation}
+Величины с индексом \(a\) вычисляются на соответствующей границе.
+Функции кнудсеновского слоя (\(Y_0\), \(\Theta_1\), \(H_A\), \(\Omega_1\)) убывают экспоненциально,
+\begin{equation}\label{eq:nonlinear_knudsen_functions}
+    \tilde\eta_a = \frac{p_H}{T_H}\eta_a, \quad \eta_a = \frac{|y-y_a|}{k},
+\end{equation}
+где \(y_a\) "--- координаты пластин.
 
 Для степенного потенциала
 \begin{equation}\label{eq:gammas_nonlinear}

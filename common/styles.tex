@@ -57,23 +57,27 @@
 }
 
 \precaption{\tabcapalign} % всегда идет перед подписью или \legend
-%\captionnamefont{\normalfont\normalsize} % Шрифт надписи «Таблица #»; также определяет шрифт у \legend
+\captionnamefont{\normalfont\small} % Шрифт надписи «Таблица #»; также определяет шрифт у \legend
 \captiondelim{\tablabelsep} % разделитель идентификатора с номером от наименования
 \captionstyle[\tabtitalign]{\tabtitalign}
-%\captiontitlefont{\normalfont\normalsize} % Шрифт с текстом подписи
+\captiontitlefont{\normalfont\small} % Шрифт с текстом подписи
 
 %%% Рисунки %%%
 \setfloatadjustment{figure}{%
     \setlength{\abovecaptionskip}{0pt}   % Отбивка над подписью
     \setlength{\belowcaptionskip}{5pt}   % Отбивка под подписью
     \precaption{} % всегда идет перед подписью или \legend
-    \captionnamefont{\normalfont\footnotesize} % Шрифт надписи «Рисунок #»; также определяет шрифт у \legend
+    \captionnamefont{\normalfont\small} % Шрифт надписи «Рисунок #»; также определяет шрифт у \legend
     \captiondelim{\figlabelsep} % разделитель идентификатора с номером от наименования
     \captionstyle[\centering]{\centering} % Центрирование подписей, заданных командой \caption и \legend
-    \captiontitlefont{\normalfont\footnotesize} % Шрифт с текстом подписи
+    \captiontitlefont{\normalfont\small} % Шрифт с текстом подписи
     \postcaption{} % всегда идет после подписи или \legend, и с новой строки
+    \setlength{\subfloatcapskip}{-10pt}
 }
 
+%%% Подписи подтаблиц %%%
+\newsubfloat{table} % Включает возможность использовать подрисунки у окружений figure
+\renewcommand{\thesubtable}{\asbuk{subtable}}           % Буквенные номера подрисунков
 %%% Подписи подрисунков %%%
 \newsubfloat{figure} % Включает возможность использовать подрисунки у окружений figure
 \renewcommand{\thesubfigure}{\asbuk{subfigure}}           % Буквенные номера подрисунков

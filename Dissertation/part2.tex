@@ -451,15 +451,15 @@ low-variance~\cite{Hadji2005, Hadji2007, Hadji2011}).
 где \(\hat{\Delta}_\gamma^{n+(\nu-1)/N}\) "--- это \(\nu\in\Nu_n\) член суммы~\eqref{eq:discrete_symm_ci},
 можно применить явный метод Эйлера первого порядка в дробных шагах
 \begin{equation}\label{eq:time_scheme}
-    \hat{f}_\gamma^{n+\nu/N} = \hat{f}_\gamma^{n+(\nu-1)/N} + \tau \hat{\Delta}_\gamma^{n+(\nu-1)/N}
+    \hat{f}_\gamma^{n+\nu/N} = \hat{f}_\gamma^{n+(\nu-1)/N} + \Delta{t} \hat{\Delta}_\gamma^{n+(\nu-1)/N}
     \left(\hat{f}_\gamma^{n+(\nu-1)/N}\right),
 \end{equation}
-где \(\tau = t_{n+1} - t_n\) "--- временн\'{о}й шаг.
-Схема~\eqref{eq:time_scheme} имеет порядок сходимости \(\OO{\tau|\Gamma|/|\Nu|}\),
+где \(\Delta{t} = t_{n+1} - t_n\) "--- временн\'{о}й шаг.
+Схема~\eqref{eq:time_scheme} имеет порядок сходимости \(\OO{\Delta{t}|\Gamma|/|\Nu|}\),
 если все дискретные скорости \(\bzeta_\gamma\) распределены равномерно
 в последовательностях \((\bzeta_{\nu})_{\nu=1}^N\) и \((\bzeta_{*\nu})_{\nu=1}^N\).
 Этого можно добиться случайной перестановкой кубатурной последовательности.
-Если \(|\Gamma|/|\Nu| = \OO{\tau}\), то достигается второй порядок точности.
+Если \(|\Gamma|/|\Nu| = \OO{\Delta{t}}\), то достигается второй порядок точности.
 
 %%% On the cubature rule
 Оптимальные кубатурные правила Коробова~\cite{Korobov1959, Sloan1994} используются
@@ -473,13 +473,13 @@ low-variance~\cite{Hadji2005, Hadji2007, Hadji2011}).
 при которых она теряет свойство устойчивости.
 Для того чтобы сохранить положительность, достаточно потребовать
 \begin{equation}\label{eq:positive_f}
-    \hat{f}_\gamma^{n+(j-1)/N} + \frac{\tau}N \hat{\Delta}_\gamma^{n+(j-1)/N} > 0
+    \hat{f}_\gamma^{n+(\nu-1)/N} + \frac{\Delta{t}}N \hat{\Delta}_\gamma^{n+(\nu-1)/N} > 0
 \end{equation}
 для всех \(\gamma\in\Gamma\) и \(\nu\in\Nu_n\).
 Если \(\gamma = \nu\), то имеем
 \begin{equation}\label{eq:positive_f_alpha}
     \hat{f}_{\nu} - \frac{A}{N}\hat{f}_{\nu}\hat{f}_{*\nu} > 0, \quad
-    A = \frac{\pi\tau V_\Gamma^2 N B_{\max}}{\sum_{\nu\in\Nu} w_{\nu}w_{*\nu}}
+    A = \frac{\pi\Delta{t} V_\Gamma^2 N B_{\max}}{\sum_{\nu\in\Nu} w_{\nu}w_{*\nu}}
 \end{equation}
 или
 \begin{equation}\label{eq:positive_f_alpha2}
@@ -561,7 +561,8 @@ low-variance~\cite{Hadji2005, Hadji2007, Hadji2011}).
 Правило смещений может также быть представлено как целочисленный вектор, т.\,е. \(\mathcal{S}\subset\mathbb{Z}^3\).
 Тогда сумму индексов следует интерпретировать как векторную сумму в~\(\mathbb{Z}^3\).
 В~\cite{Anikin2012} показано, что проекционный метод обладает вторым порядком аппроксимации
-по отношению к шагу прямоугольной скоростной сетки.
+по отношению к шагу прямоугольной скоростной сетки, поэтому веса \(w_\gamma\) выбираются так,
+чтобы соответствовать формуле прямоугольников со срединной точкой.
 
 %%% Review of schemes
 Благодаря симметрии равномерной сетки,
@@ -604,7 +605,7 @@ low-variance~\cite{Hadji2005, Hadji2007, Hadji2011}).
 \end{equation}
 где \(\be_i\) "--- базис прямоугольной скоростной сетки. Проекционные веса равны
 \begin{equation}\label{eq:stencil_weights5}
-    r_{\lambda,0} = 1 - \sum_{j=1}^4 r_{\lambda,j}, \quad
+    r_{\lambda,0} = 1 - \sum_{i=1}^4 r_{\lambda,i}, \quad
     r_{\lambda,i} = \frac{\eta_i - r_{\lambda,4}h_{-i}}{h_{+i}}, \quad
     r_{\lambda,4} = \frac{\boldsymbol{\eta}\cdot(\boldsymbol{\eta} - \bh_+)}
         {\bh_-\cdot(\bh_- - \bh_+)}.
@@ -625,13 +626,13 @@ low-variance~\cite{Hadji2005, Hadji2007, Hadji2011}).
 \end{equation}
 Проекционные веса равны
 \begin{equation}\label{eq:stencil_weights7}
-    r_{\lambda,0} = 1 - \sum_{j=1}^3 r_{\lambda,j} + r_{\lambda,-j}, \quad
+    r_{\lambda,0} = 1 - \sum_{i=1}^3 r_{\lambda,i} + r_{\lambda,-i}, \quad
     r_{\lambda,\pm i} = \pm\frac{\eta_i(\eta_i - h_{\mp i})}{h_{\pm i}(h_{+i}-h_{-i})}.
 \end{equation}
 В~\eqref{eq:stencil_weights7} суммирование по повторяющимся индексам не производится.
 Для равномерной сетки справедливы следующие соотношения:
 \begin{equation}\label{eq:weights_ranges7}
-    \frac14 \leq r_{\lambda,0} \leq 1, \quad
+    \frac14 \leq r_{\lambda,0} \le  q 1, \quad
     0 \leq r_{\lambda,\pm i} \leq \frac38, \quad
     -\frac18 \leq r_{\lambda,\mp i} \leq 0, \quad
     R_\mathcal{S} = 2h.
