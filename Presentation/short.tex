@@ -1,0 +1,232 @@
+%&pdflatex
+\documentclass[mathserif]{beamer} %, handout
+\usetheme[progressbar=foot]{metropolis}
+\setbeamertemplate{caption*}[numbered]
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{amssymb, amsmath, amsfonts, mathtools, mathrsfs}
+\usepackage[normalem]{ulem} % for sout
+\usepackage{changepage} % for adjustwidth
+\usepackage{tabu, tabulary}
+\usepackage{comment}
+
+\input{../common/data.tex}
+\graphicspath{{../images/}{images/}}
+
+\title{\thesisTitle}
+\author{%
+    \emph{соискатель}:~\thesisAuthor\\ %Рогозин Олег Анатольевич\\
+    \emph{руководитель}:~\supervisorRegaliaShort~\supervisorFio %д.ф.-м.н., проф. Черемисин Феликс Григорьевич\\
+}
+\institute{%
+    \thesisOrganization % Вычислительный центр ФИЦ ИУ РАН
+}
+\date{}
+
+\newcommand{\Kn}{\mathrm{Kn}}
+\newcommand{\St}{\mathrm{St}}
+\newcommand{\Ma}{\mathrm{Ma}}
+\newcommand{\loc}{\mathrm{loc}}
+\newcommand{\eqdef}{\overset{\mathrm{def}}{=}}
+\newcommand{\dd}{\:\mathrm{d}}
+\newcommand{\pder}[2][]{\frac{\partial#1}{\partial#2}}
+\newcommand{\pderdual}[2][]{\frac{\partial^2#1}{\partial#2^2}}
+\newcommand{\pderder}[3][]{\frac{\partial^2#1}{\partial#2\partial#3}}
+\newcommand{\Pder}[2][]{\partial#1/\partial#2}
+\newcommand{\dxi}{\boldsymbol{\dd\xi}}
+\newcommand{\domega}{\boldsymbol{\dd\omega}}
+\newcommand{\bomega}{\boldsymbol{\omega}}
+\newcommand{\bxi}{\boldsymbol{\xi}}
+\newcommand{\bh}{\boldsymbol{h}}
+\newcommand{\be}{\boldsymbol{e}}
+\newcommand{\Nu}{\mathcal{N}}
+\newcommand{\Mu}{\mathcal{M}}
+\newcommand{\OO}[1]{O(#1)}
+\newcommand{\Set}[2]{\{\,{#1}:{#2}\,\}}
+\newcommand{\xoverbrace}[2][\vphantom{\int}]{\overbrace{#1#2}}
+\newcommand{\Cite}[2][]{\alert{\textsc{#2 #1}}}
+\newcommand{\inner}[2]{\left\langle{#1},{#2}\right\rangle}
+
+\newcommand\pro{\item[$+$]}
+\newcommand\con{\item[$-$]}
+
+% use Russian tradition
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+    \frametitle{Цели и задачи}
+    \textbf{Объект исследования:} движение одноатомного газа
+    \textbf{Предмет исследования:}
+    \begin{itemize}
+        \item методы численного и асимптотического анализа,
+        \item физические свойства стационарных течений.
+    \end{itemize}
+    \textbf{Цель исследования:}
+    \begin{itemize}
+        \item развитие и апробация КПИМДС для неравномерных сеток,
+        \item численный анализ некоторых течений разреженного газа.
+    \end{itemize}
+    \textbf{Актуальность:}
+    \begin{itemize}
+        \item активным развитием прикладных областей,
+        \item потребностью в высокоточных численных методах,
+        \item быстрым ростом доступных вычислительных ресурсов.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Кинетическое описание газа}
+    Функция распределения молекулярных скоростей
+    \begin{equation}
+        f(x,\xi): \Omega\times\mathbb{R}^d\mapsto\mathbb{R}_+
+        \quad (\Omega\subset\mathbb{R}^d),
+    \end{equation}
+    Стационарное уравнение Больцмана
+    \begin{equation}
+        \xi\cdot\pder[f]{x} = \int_{\mathbb{R}^d}\dxi_* \int_{S^{d-1}} \dd\sigma
+        \overbrace{B(\xi-\xi_*,\sigma)}^\text{collisional kernel}
+        \Big( \overbrace{f'f'_*}^\text{gain} - \overbrace{ff_*}^\text{loss} \Big).
+    \end{equation}
+    Макроскопические переменные:
+    \begin{gather*}
+        \rho = \int_{\mathbb{R}^d} f\dxi, \\
+        v = \frac1\rho\int_{\mathbb{R}^d} \xi f\dxi, \\
+        T = \frac1{d\rho}\int_{\mathbb{R}^d} \left(|\xi|^2 - |v|^2\right) f\dxi.
+    \end{gather*}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Функция распределения при \(\Delta{v}=2\) и \(Kn=1\)}
+    Логарифмические сингулярности (\(x_{Bi}\) "--- граница):
+    \begin{gather}
+        \pder[f]{x_i}n_i = \frac{C}{\Kn}\ln\frac{(x_i-x_{Bi})n_i}{\Kn} + \OO{1}, \\
+        \pder[f]{\xi_i}n_i = C\ln\xi_in_i + \OO{1}.
+    \end{gather}
+    \vspace{-20pt}
+    \begin{columns}
+        \column{.55\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{{{couette/distrib_f/kn1.0-boundary}}}\vspace{-10pt}
+            \caption{Возле пластины}
+        \end{figure}
+        \column{.55\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{{{couette/distrib_f/kn1.0-center}}}\vspace{-10pt}
+            \caption{Вблизи центра}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Зависимость сдвигового напряжения от \(\Kn\)}
+    \vspace{-10pt}
+    \[ P_{xy} = -\Gamma_1(T_H)\pder[v_H]{y}k + \OO{k^3} \]
+    \vspace{-40pt}
+    \centering\hspace{-1.5cm}
+    \includegraphics[width=1.1\linewidth]{couette/integrated/shear}
+    \hspace{-1.5cm}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Зависимость продольного теплового потока от \(\Kn\)}
+    \vspace{-20pt}
+    \[ q_x = q_{xK1}k
+        + \frac{T_H}{p_H}\left( \frac{\Gamma_3}2 \pderdual[v_H]{y}
+            + 4\Gamma_{10} \pder[T_H]{y}\pder[v_H]{y} \right)k^2
+        + q_{xK2}k^2 + \OO{k^3} \]
+    \vspace{-40pt}
+    \centering\hspace{-1.5cm}
+    \includegraphics[width=1.1\linewidth]{couette/integrated/qflow}
+    \hspace{-1.5cm}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Транспортные коэффициенты для модели твёрдых сфер}
+    \begin{alignat*}{2}
+        \gamma_1 &= 1.270042427, \quad &\text{\Cite[1957]{Pekeris, Alterman}} \\
+        \gamma_2 &= 1.922284065, \quad &\text{\Cite[1957]{Pekeris, Alterman}} \\
+        \gamma_3 &= 1.947906335, \quad &\text{\Cite[1992]{Ohwada, Sone}} \\
+        \gamma_7 &= 0.189200,    \quad &\text{\Cite[1996]{\footnotesize Sone, Aoki, Takata, Sugimoto, Bobylev}} \\
+        \gamma_8 &= 1.495941968, \quad &\text{\Cite[2016]{Rogozin}} \\
+        \gamma_9 &= 1.636073458, \quad &\text{\Cite[2016]{Rogozin}} \\
+        \gamma_{10} &= 2.4497795.\quad &\text{\Cite[2016]{Rogozin}}
+    \end{alignat*}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Поле скоростей при \(\Kn=0.02\)}
+    \begin{figure}
+        \hspace{-.5cm}
+        \begin{overprint}
+            \onslide<1| handout:3>
+                \includegraphics[width=\linewidth]{{{snit/elliptic/kgf-0.02-flow}}}
+                \vspace{-20pt}
+                \caption{уравнения КГФ с граничными условиями ведущего порядка}
+            \onslide<2| handout:2>
+                \includegraphics[width=\linewidth]{{{snit/elliptic/first-0.02-flow}}}
+                \vspace{-20pt}
+                \caption{уравнения КГФ с граничными условиями первого порядка}
+            \onslide<3| handout:1>
+                \includegraphics[width=\linewidth]{{{snit/elliptic/curv-0.02-flow}}}
+                \vspace{-20pt}
+                \caption{уравнения КГФ с граничными условиями второго порядка}
+            \onslide<4| handout:0>
+                \includegraphics[width=\linewidth]{{{snit/elliptic/kes-0.02-flow}}}
+                \vspace{-20pt}
+                \caption{численное решение уравнения Больцмана}
+        \end{overprint}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Заключение}
+    Основные положения, выносимые на защиту:
+    \begin{enumerate}
+        \item\label{defpos:stencils}
+        Критерии положительности для многоточечных проекционных шаблонов.
+        \item\label{defpos:transport_coeffs}
+        Транспортные коэффициенты для газа твёрдых сфер.
+        \item\label{defpos:Couette_flow}
+        Решение нелинейной плоской задачи Куэтта в широком диапазоне \(\Kn\) и \(\Ma\).
+        \item\label{defpos:asymptotic_verification}
+        Разница между асимптотическим и кинетическим решениями не более \(10^{-4}\).
+        \item\label{defpos:boundary_conditions}
+        Граничные условия первого и второго порядка для уравнений КГФ.
+        \item\label{defpos:snit_forces}
+        Электростатическая аналогия при обтекании равномерно нагретых тел.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{References}
+    \newcommand\zerodoi{10.1007/s00162-014-0334-5}
+    \newcommand\firstdoi{10.1016/j.euromechflu.2016.06.011}
+    \newcommand\seconddoi{10.1134/S0965542517060112}
+    \newcommand\secondarxiv{1701.05811}
+    \begin{itemize}
+        \item {[Rogozin 2014]} \\
+        “Computer simulation of slightly rarefied gas flows driven by significant temperature variations and their continuum limit”.
+        In:~\textit{Theoretical and Computational Fluid Dynamics} 28.6 (2014), pp.~573–587.
+        \textsc{doi}:~\href{http://dx.doi.org/\zerodoi}{\alert{\texttt{\zerodoi}}}.
+        \item {[Rogozin 2016]} \\
+        “Numerical analysis of the nonlinear plane Couette-flow problem of a rarefied gas for hard-sphere molecules”.
+        In:~\textit{European Journal of Mechanics B/Fluids} 60 (2016), pp.~148–163.
+        \textsc{doi}:~\href{http://dx.doi.org/\firstdoi}{\alert{\texttt{\firstdoi}}}.
+        \item {[Rogozin 2017]} \\
+        “Slow non-isothermal flows: numerical and asymptotic analysis of the Boltzmann equation”.
+        In:~\textit{Computational Mathematics and Mathematical Physics} 57.7 (2017), pp.~1205–1229.
+        \textsc{doi}:~\href{http://dx.doi.org/\seconddoi}{\alert{\texttt{\seconddoi}}}.
+        \textsc{arXiv}:~\href{http://arxiv.org/abs/\secondarxiv}{\alert{\texttt{\secondarxiv}}}.
+    \end{itemize}
+\end{frame}
+
+\end{document}

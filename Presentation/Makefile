@@ -1,7 +1,7 @@
-all:	talk
+all:	short.pdf #long.pdf
 
-talk:	pdf
-	#	latexmk -pdf -pdflatex="xelatex %O %S" presentation.tex
+%.pdf: %.tex
+	latexmk -pdf $*
 
 pdf:
 	latexmk -pdf -jobname=presentation -silent  presentation.tex
@@ -10,8 +10,7 @@ pdf:
 # 	latexmk -pdf -pdflatex="xelatex %O %S" draft
 
 clean:
-	latexmk -C presentation
-	rm -f synopsis.bbl
+	latexmk -C short long
 
 distclean:
 	## Core latex/pdflatex auxiliary files:
