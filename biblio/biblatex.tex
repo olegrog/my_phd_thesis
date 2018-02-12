@@ -326,9 +326,10 @@ bibencoding=utf8,% кодировка bib файла
 \printbibliography[heading=counter,env=counter,keyword=bibliofull,section=0]
 }
 
+\defbibnote{vaknote}{\centering\textit{\vakbibtitle}}
 \newcommand*{\insertbiblioauthorcited}{
 \newrefcontext[sorting=ydnt]
-\printbibliography[heading=authorpublications,keyword=biblioauthor,section=0,title=\authorbibtitle]
+\printbibliography[heading=authorpublications,keyword=biblioauthor,section=0,title=\authorbibtitle,prenote=vaknote]
 }
 \newcommand*{\insertbiblioauthor}{
 \printbibliography[heading=authorpublications,keyword=biblioauthor,section=1,title=\authorbibtitle]
