@@ -1,4 +1,4 @@
-all:	short.pdf #long.pdf
+all:	short.pdf presentation.pdf
 
 %.pdf: %.tex
 	latexmk -pdf $*
@@ -10,7 +10,7 @@ pdf:
 # 	latexmk -pdf -pdflatex="xelatex %O %S" draft
 
 clean:
-	latexmk -C short long
+	latexmk -C short presentation
 
 distclean:
 	## Core latex/pdflatex auxiliary files:

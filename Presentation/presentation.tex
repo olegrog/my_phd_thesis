@@ -1,196 +1,596 @@
-\documentclass[14pt]{beamer}
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english,russian]{babel}
-\usepackage{amssymb,amsfonts,amsmath,mathtext}
-\usepackage{cite,enumerate,float,indentfirst}
+%&pdflatex
+\documentclass[mathserif]{beamer} %, handout
+\usetheme[progressbar=foot]{metropolis}
+\setbeamertemplate{caption*}[numbered]
 
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{amssymb, amsmath, amsfonts, mathtools, mathrsfs}
+\usepackage[normalem]{ulem} % for sout
+\usepackage{changepage} % for adjustwidth
+\usepackage{tabu, tabulary}
+\usepackage{comment}
+
+\input{../common/data.tex}
 \graphicspath{{../images/}{images/}}
 
-
-
-% \usetheme[secheader]{Boadilla}
-% \usecolortheme{seahorse}
-
-\usetheme{Pittsburgh}
-\usecolortheme{whale}
-
-\beamertemplatenavigationsymbolsempty
-
-\newcommand{\todo}{\alert}
-\input{../common/data.tex}      % Основные сведения
-
-\setbeamercolor{footline}{fg=blue}
-\setbeamertemplate{footline}{
-  \leavevmode%
-  \hbox{%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
-    % И. О. Фамилия, Организация кратко
-    \thesisAuthorShort, \thesisOrganizationShort
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{}%
-    % Город, 20XX
-    \thesisCity, \thesisYear
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{}%
-  Стр. \insertframenumber{} из \inserttotalframenumber \hspace*{2ex}
-  \end{beamercolorbox}}%
-  \vskip0pt%
+\title{\thesisTitle}
+\author{%
+    \emph{соискатель}:~\thesisAuthor\\ %Рогозин Олег Анатольевич\\
+    \emph{руководитель}:~\supervisorRegaliaShort~\supervisorFio %д.ф.-м.н., проф. Черемисин Феликс Григорьевич\\
 }
-
-\newcommand{\itemi}{\item[\checkmark]}
-
-%\title{\small{Название презентации}}
-\title{\small{\thesisTitle}}
-\author{\small{%
-\emph{Выступающий:}~\thesisAuthorShort\\%
-\emph{Руководитель:}~\supervisorRegaliaShort~\supervisorFioShort}\\%
-\vspace{30pt}%
-\thesisOrganization%
-\vspace{20pt}%
+\institute{%
+    \thesisOrganization % Вычислительный центр ФИЦ ИУ РАН
 }
-\date{\small{\thesisCity, \thesisYear}}
+\date{}
+
+\newcommand{\Kn}{\mathrm{Kn}}
+\newcommand{\St}{\mathrm{St}}
+\newcommand{\Ma}{\mathrm{Ma}}
+\newcommand{\loc}{\mathrm{loc}}
+\newcommand{\eqdef}{\overset{\mathrm{def}}{=}}
+\newcommand{\dd}{\:\mathrm{d}}
+\newcommand{\der}[2][]{\frac{\dd#1}{\dd#2}}
+\newcommand{\derdual}[2][]{\frac{\dd^2#1}{\dd#2^2}}
+\newcommand{\pder}[2][]{\frac{\partial#1}{\partial#2}}
+\newcommand{\pderdual}[2][]{\frac{\partial^2#1}{\partial#2^2}}
+\newcommand{\pderder}[3][]{\frac{\partial^2#1}{\partial#2\partial#3}}
+\newcommand{\Pder}[2][]{\partial#1/\partial#2}
+\newcommand{\dxi}{\boldsymbol{\dd\xi}}
+\newcommand{\domega}{\boldsymbol{\dd\omega}}
+\newcommand{\bomega}{\boldsymbol{\omega}}
+\newcommand{\bxi}{\boldsymbol{\xi}}
+\newcommand{\bh}{\boldsymbol{h}}
+\newcommand{\be}{\boldsymbol{e}}
+\newcommand{\Nu}{\mathcal{N}}
+\newcommand{\Mu}{\mathcal{M}}
+\newcommand{\OO}[1]{O(#1)}
+\newcommand{\Set}[2]{\{\,{#1}:{#2}\,\}}
+\newcommand{\xoverbrace}[2][\vphantom{\int}]{\overbrace{#1#2}}
+\newcommand{\Cite}[2][]{\alert{\textsc{#2 #1}}}
+\newcommand{\inner}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\onwall}[1]{\left(#1\right)_0}
+\newcommand{\deltann}[2]{(\delta_{#1#2}-n_#1 n_#2)}
+
+% use Russian tradition
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
 
 \begin{document}
 
-\maketitle
+\frame{\titlepage}
 
 \begin{frame}
-\frametitle{Цели и задачи}
-\begin{itemize}
-  \item \textbf{Предмет исследования:}
-  \item \textbf{Исследуемые характеристики:}
-  \item \textbf{Цель исследования:}
-  \item \textbf{Актуальность:}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Проблемы}
-\begin{itemize}
-  \item Проблема 1
-  \item Проблема 2
-  \item Проблема 3
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{План работ}
-\begin{enumerate}
-  \item \textbf{Задача 1}
-  \begin{itemize}
-    \item Подзадача 1-1
-    \item Подзадача 1-2
-  \end{itemize}
-  \item \textbf{Задача 2}
-  \begin{itemize}
-    \item Подзадача 2-1
-    \item Подзадача 2-2
-    \item Подзадача 2-3
-  \end{itemize}
-  \item \textbf{Задача 3}
-  \begin{itemize}
-    \item Подзадача 3-1
-    \item Подзадача 3-2
-    \item Подзадача 3-3
-  \end{itemize}
-\end{enumerate}
-\end{frame}
-
-\begin{frame}
-\frametitle{Список обыкновенный}
-\begin{itemize}
-  \item Пункт 1
-  \item Пункт 2
-  \item Пункт 3
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Формулы}
-$$
-\left\{
-  \begin{array}{rl}
-    \dot x = & \sigma (y-x) \\
-    \dot y = & x (r - z) - y \\
-    \dot z = & xy - bz
-  \end{array}
-\right.
-$$
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Таблица}
-\begin{tabular}{|l|l|}
-\hline
-\textbf{Заголовок 1} & \textbf{Заголовок 2} \\
-\hline
-Сумма & $b+a$ \\
-\hline
-Разность & $a-b$ \\
-\hline
-Произведение & $a*b$ \\
-\hline
-\end{tabular}
-\end{frame}
-
-\begin{frame}
-\frametitle{Большой многоуровневый список}
-\begin{itemize}
-  \item \textbf{Пункт 1}
+    \frametitle{Цели и задачи}
+    \textbf{Объект исследования:}\vspace{-5pt}
     \begin{itemize}
-      \itemi Подпункт 1-1
-      \itemi Подпункт 1-2
+        \item динамика разреженного одноатомного газа
     \end{itemize}
-  \item \textbf{Пункт 2}
+    \textbf{Предмет исследования:}\vspace{-5pt}
     \begin{itemize}
-      \itemi Подпункт 2-1
+        \item методы численного и асимптотического анализа,
+        \item физические свойства стационарных течений.
     \end{itemize}
-  \item \textbf{Пункт 3}
+    \textbf{Цель исследования:}\vspace{-5pt}
     \begin{itemize}
-      \itemi Подпункт 3-1
-      \itemi Подпункт 3-2
+        \item развитие и апробация КПИМДС для неравномерных сеток,
+        \item численный анализ некоторых известных течений.
     \end{itemize}
-  \item \textbf{Пункт 4}
+    \textbf{Актуальность:}\vspace{-5pt}
     \begin{itemize}
-      \itemi Подпункт 4-1
+        \item активным развитием прикладных областей,
+        \item потребностью в высокоточных численных методах,
+        \item быстрым ростом доступных вычислительных ресурсов.
     \end{itemize}
-  \item \textbf{Пункт 5}
-    \begin{itemize}
-      \itemi Подпункт 5-1
-      \itemi Подпункт 5-2
-      \itemi Подпункт 5-3
-    \end{itemize}
-\end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Перспективы развития проекта}
-\begin{itemize}
-  \item Перспектива 1
-  \item Перспектива 2
-  \item Перспектива 3
-  \item Перспектива 4
-  \item Перспектива 5
-\end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Результаты работы}
-\begin{itemize}
-  \item Результат 1
-  \item Результат 2
-  \item Результат 3
-  \item Результат 4
-\end{itemize}
+    \frametitle{Кинетическое описание газа}
+    Функция распределения молекулярных скоростей
+    \begin{equation}
+        f(x_i,\xi_i): \Omega\times\mathbb{R}^D\mapsto\mathbb{R}_+
+        \quad (\Omega\subset\mathbb{R}^D),
+    \end{equation}
+    \pause
+    Стационарное уравнение Больцмана:
+    \begin{equation}
+        \xi_i\pder[f]{x_i} = \int_{\mathbb{R}^D}\dxi_* \int_{S^{D-1}} \dd\Omega(\boldsymbol{\alpha})
+        \overbrace{B(\bxi-\bxi_*,\boldsymbol{\alpha})}^\text{collisional kernel}
+        \Big( \overbrace{f'f'_*}^\text{gain} - \overbrace{ff_*}^\text{loss} \Big),
+    \end{equation}
+    \begin{gather*}
+        f=f(\bxi), \quad f_*=f(\bxi_*), \quad f'=f(\bxi'), \quad f'_*=f(\bxi'_*), \\
+        \xi_i' = \xi_i+\alpha_i\alpha_j \left(\xi_{j*}-\xi_j\right), \quad
+        \xi_{i*}' = \xi_{i*}-\alpha_i\alpha_j \left(\xi_{j*}-\xi_j\right).
+    \end{gather*}
+    \pause
+    Макроскопические переменные:
+    \begin{equation}
+        \begin{gathered}
+        \rho = \int_{\mathbb{R}^D} f\dxi, \quad
+        v_i = \frac1\rho\int_{\mathbb{R}^D} \xi_i f\dxi, \\
+        T = \frac1{D\rho}\int_{\mathbb{R}^D} \left(\xi_i - v_i\right)^2 f\dxi.
+        \end{gathered}
+    \end{equation}
 \end{frame}
 
 \begin{frame}
-\begin{center}
-Спасибо за внимание!
-\end{center}
+    \frametitle{Дискретизация пространства скоростей}
+    % Группа для УБ, просто множество для модельных типа БГК
+    Решётка \(\mathcal{V} = \Set{\xi_\gamma}{\gamma\in\Gamma}\) построена так, что
+    \begin{equation}\label{eq:xi_cubature}
+        \int F(\bxi) \dxi \approx \sum_{\gamma\in\Gamma} F_\gamma w_\gamma =
+            \sum_{\gamma\in\Gamma} \hat{F_\gamma},
+            \quad F_\gamma = F(\bxi_\gamma),
+    \end{equation}\vspace{-10pt}
+
+    где \(\sum_{\gamma\in\Gamma} w_\gamma = V_\Gamma\) "--- объём, покрываемый скоростной сеткой.
+    \pause\vspace{10pt}
+
+    Дискретизация интеграла столкновений:
+    \begin{equation}\label{eq:discrete_symm_ci}
+        \footnotesize
+        \hat{J}_\gamma = \frac{\pi V_\Gamma^2}{\displaystyle\sum_{\nu\in\Nu} w_{\nu}w_{*\nu}}
+            \sum_{\nu\in\Nu} \bigg(
+                \delta_{\gamma\nu} + \delta_{*\gamma\nu} -
+                \xoverbrace{ \alert{\delta'_{\gamma\nu}} - \alert{\delta'_{*\gamma\nu}} }^\text{projection}
+            \bigg)\bigg(
+                \xoverbrace{ \frac{w_{\nu}w_{*\nu}}{\alert{w'_{\nu}w'_{*\nu}}}
+                \alert{\hat{f}'_{\nu}\hat{f}'_{*\nu}} }^\text{interpolation} - \hat{f}_{\nu}\hat{f}_{*\nu}
+            \bigg)B_\nu.
+    \end{equation}\vspace{-10pt}
+    % микроскопическая консервативность
+    Цель --- чтобы каждый член суммы\vspace{5pt}
+    \begin{itemize}
+        \item сохраняет массу, импульс, энергию,
+        \item не уменьшает энтропию.
+    \end{itemize}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Консервативное проецирование}
+    \centering{\Large\bf Почему метод называется проекционным?}
+    \vspace{10pt}
+
+    Проекционная процедура Петрова"--~Галёркина:
+    \begin{equation}\label{eq:Petrov-Galerkin}
+        \int \xoverbrace{ \psi_s(\bxi_\gamma) }^\text{test space} \bigg(
+            \alert{\delta(\bxi'-\bxi_\gamma)} - \sum_{a\in\Lambda} r_{\lambda,a}
+            \xoverbrace{ \delta(\bxi_{\lambda+s_a}-\bxi_\gamma) }^\text{trial space}
+        \bigg) \dxi_\gamma = 0.
+    \end{equation}
+    \begin{equation*}
+        \psi_0 = 1,\;\psi_i = \xi_i,\;\psi_4 = \xi_i^2
+        \quad\implies\quad\text{консервативность}
+    \end{equation*}
+\end{frame}
+
+\section{Нелинейное течение Куэтта}
+
+\begin{frame}
+    \frametitle{Плоское течение Куэтта}
+    \begin{columns}
+        \column{.5\textwidth}
+        \hspace{-10pt}\includegraphics{couette/tikz/geometry}
+        \vspace{-10pt}
+        \[ \Delta{T} = 0 \]
+        \column{.6\textwidth}
+        \begin{itemize}
+            \item Линейная задача \(\Delta{v} = o(1)\): \[ x_i\to\mathbb{R}^1, \zeta_i\to\mathbb{R}^{\alert{2}}\]
+            Решена в \newline \Cite[1990]{Sone, Takata, Ohwada}
+            \bigskip
+            \item Нелинейная задача \(\Delta{v} = \OO{1}\): \[ x_i\to\mathbb{R}^1, \zeta_i\to\mathbb{R}^{\alert{3}} \]
+            Решена в \Cite[2016]{Rogozin}
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Функция распределения при \(\Delta{v}=2\) и \(Kn=1\)}
+    Логарифмическая сингулярность \Cite[2016]{Chen, Funagane, Liu, Takata}:
+    \begin{equation}
+        \pder[f]{\xi_i}n_i = C\ln\xi_in_i + \OO{1}.
+    \end{equation}
+    \vspace{-20pt}
+    \begin{columns}
+        \column{.55\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{{{couette/distrib_f/kn1.0-boundary}}}\vspace{-10pt}
+            \caption{Возле пластины}
+        \end{figure}
+        \column{.55\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{{{couette/distrib_f/kn1.0-center}}}\vspace{-10pt}
+            \caption{Вблизи центра}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Профили макроскопических величин}
+    Логарифмическая сингулярность \Cite[2014]{Chen, Liu, Takata}:
+    \begin{equation}
+        \pder[f]{x_i}n_i = \frac{C}{\Kn}\ln\frac{(x_i-x_{Bi})n_i}{\Kn} + \OO{1},
+        \quad x_{Bi}\text{ "--- граница}.
+    \end{equation}
+    \vspace{-20pt}
+    \begin{columns}
+        \column{.55\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{couette/profiles/qx}\vspace{-10pt}
+            \caption{Продольный поток тепла}
+        \end{figure}
+        \column{.55\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{couette/profiles/Pzz}\vspace{-10pt}
+            \caption{Величина \(2\int(\xi_z^2-\xi_y^2)f\dxi\)}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Зависимость сдвигового напряжения от \(\Kn\)}
+    \vspace{-10pt}
+    \[ P_{xy} = -\Gamma_1(T_H)\der[v_H]{y}k + \OO{k^3} \]
+    \vspace{-10pt}
+
+    \centering\hspace{-1.5cm}
+    \includegraphics[width=1.0\linewidth]{couette/integrated/shear}
+    \hspace{-1.5cm}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Зависимость продольного теплового потока от \(\Kn\)}
+    \vspace{-20pt}
+    \[ q_x = q_{xK1}k
+        + \frac{T_H}{p_H}\left( \frac{\Gamma_3}2 \derdual[v_H]{y}
+            + 4\Gamma_{10} \der[T_H]{y}\der[v_H]{y} \right)k^2
+        + q_{xK2}k^2 + \OO{k^3} \]
+    \vspace{-10pt}
+
+    \centering\hspace{-1.5cm}
+    \includegraphics[width=1.0\linewidth]{couette/integrated/qflow}
+    \hspace{-1.5cm}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Зависимость \(2\int(\xi_z^2-\xi_y^2)f\dxi\) от \(\Kn\)}
+    \vspace{-15pt}
+    \[ P_{zzH} - P_{yyH} = \frac{2\Gamma_8}{p_H}\left(\der[v_H]{y}\right)^2 k^2 + \OO{k^3} \]
+    \vspace{-15pt}
+
+    \centering\hspace{-1.5cm}
+    \includegraphics[width=1.0\linewidth]{couette/integrated/pzz}
+    \hspace{-1.5cm}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Транспортные коэффициенты для модели твёрдых сфер}
+    \begin{alignat*}{2}
+        \gamma_1 &= 1.270042427, \quad &\text{\Cite[1957]{Pekeris, Alterman}} \\
+        \gamma_2 &= 1.922284065, \quad &\text{\Cite[1957]{Pekeris, Alterman}} \\
+        \gamma_3 &= 1.947906335, \quad &\text{\Cite[1992]{Ohwada, Sone}} \\
+        \gamma_7 &= 0.189200,    \quad &\text{\Cite[1996]{\footnotesize Sone, Aoki, Takata, Sugimoto, Bobylev}} \\
+        \gamma_8 &= 1.495941968, \quad &\text{\Cite[2016]{Rogozin}} \\
+        \gamma_9 &= 1.636073458, \quad &\text{\Cite[2016]{Rogozin}} \\
+        \gamma_{10} &= 2.4497795.\quad &\text{\Cite[2016]{Rogozin}}
+    \end{alignat*}
+\end{frame}
+
+\section{Задача Соне--Бобылева}
+
+\begin{frame}
+    \frametitle{Задача Соне--Бобылева}
+    \begin{columns}
+        \column{.5\textwidth}
+        \hspace{-10pt}\includegraphics{snit/tikz/sone_bobylev}
+        \[ T_B = 1 - \frac{\cos(2\pi x)}{2} \]
+        \column{.55\textwidth}
+        \begin{itemize}
+            \item \(\Kn\to0\) для модели БГК и твёрдых сфер \\ \Cite[1996]{Sone, ..., Bobylev}
+            \smallskip
+            \item \(\Kn=\OO{1}\) для модели БГК \Cite[1996]{Sone, ..., Bobylev}
+            \smallskip
+            \item \(\Kn=\OO{1}\) для твёрдых сфер \Cite[2017]{Rogozin}
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Уравнения гидродинамического типа}
+    \Cite[1970, 1971, 1976]{Коган, Галкин, Фридлендер}:
+    \begin{align*}
+        \pder{x_i}\left(\frac{u_{i1}}{T_0}\right) &= 0, \\
+        \pder{x_j}\left(\frac{u_{i1}u_{j1}}{T_0}\right)
+            &-\frac12\pder{x_j}\left[\Gamma_1\left(
+                \pder[u_{i1}]{x_j} + \pder[u_{j1}]{x_i} - \frac23\pder[u_{kH1}]{x_k}\delta_{ij}
+            \right)\right] \notag\\
+            &-\alert{\left[
+                \frac{\Gamma_7}{\Gamma_2}\frac{u_{j1}}{T_0}\pder[T_0]{x_j}
+                + \frac{\Gamma_2^2}4 \left(\frac{\Gamma_7}{\Gamma_2^2}\right)'
+                    \left(\pder[T_0]{x_j}\right)^2
+            \right]\pder[T_0]{x_i}} \notag\\
+            &= -\frac12\pder[p_2^\dag]{x_i}, \\
+        \pder[u_{i1}]{x_i} &= \frac12\pder{x_i}\left(\Gamma_2\pder[T_0]{x_i}\right),
+    \end{align*}
+    где
+    \begin{equation*}
+        p_2^\dag = p_0 p_2
+            + \frac23\pder{x_k}\left(\Gamma_3\pder[T_0]{x_k}\right)
+            - \frac{\Gamma_7}{6}\left(\pder[T_0]{x_k}\right)^2, \quad u_{i1} = p_0v_{i1}.
+    \end{equation*}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Слой Кнудсена первого порядка}
+    \begin{equation}
+        \alert{T_0} = T_{B0}. \label{eq:bc_T0}
+    \end{equation}
+
+    \begin{gather}
+        \frac{p_0}{T_{B0}}
+            \begin{bmatrix} \alert{T_1} - T_{B1} \\ T_{K1} \\ T_{B0}^2\rho_{K1} \end{bmatrix} =
+            \onwall{\pder[T_0]{x_j}} n_j \begin{bmatrix} d_1 \\ \Theta_1(\eta) \\ p_0\Omega_1(\eta) \end{bmatrix}, \\
+        \left\{
+        \begin{aligned}
+            & \frac1{\sqrt{T_{B0}}}\begin{bmatrix} (\alert{u_{j1}} - u_{Bj1}) \\ u_{jK1} \end{bmatrix} \deltann{i}{j} =
+                \onwall{\pder[T_0]{x_j}}\begin{bmatrix} k_0 \\ Y_0(\eta) \end{bmatrix}\deltann{i}{j}, \\
+            & \alert{u_{j1}} n_j = 0.
+        \end{aligned}
+        \right.
+    \end{gather}
+    \vspace{-20pt}
+    \begin{itemize}
+        \item \(\eta\) "--- растянутая координата вдоль нормали
+        \item \(\Theta_1, \Omega_1, Y_0 = \OO{\eta^{-\infty}}\)
+        \item \(\onwall{\cdots}\) "--- значение на границе (\(\eta=0\))
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Изотермические линии при \(\Kn=0.01\)}
+    \begin{columns}
+        \column{.55\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{{{snit/contours/asym-0.01-temp}}}
+            \caption{уравнения КГФ с учётом температурного скачка}
+        \end{figure}
+        \column{.55\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{{{snit/contours/kes-0.01-temp}}}
+            \caption{уравнение Больцмана \hspace{100pt}\vphantom{.}}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Поле скоростей при \(\Kn=0.01\)}
+    \begin{columns}
+        \column{.55\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{{{snit/contours/asym-0.01-vel}}}
+            \caption{уравнения КГФ с учётом температурного скачка}
+        \end{figure}
+        \column{.55\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{{{snit/contours/kes-0.01-vel}}}
+            \caption{уравнение Больцмана \hspace{100pt}\vphantom{.}}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Зависимость температурного поля от \(\Kn\)}
+    \begin{figure}
+        \includegraphics{snit/vs_kn/top_temp}
+        \caption{интеграл температуры вдоль оси симметрии}
+    \end{figure}
+\end{frame}
+
+\section{Течение между некоаксиальными цилиндрами}
+
+\begin{frame}
+    \frametitle{Поле скоростей в континуальном пределе}
+    \centering
+    \begin{figure}
+    \begin{overprint}
+        \onslide<1| handout:1>
+            \[ T_1 = 1, \quad T_2 = 5.\]
+            \hspace{-1cm}
+            \includegraphics[width=1.15\linewidth]{kgf/noncoaxial/cylinder5}
+        \onslide<2| handout:0>
+            \[ T_1 = 1, \quad T_2 = 50.\]
+            \hspace{-1cm}
+            \includegraphics[width=1.15\linewidth]{kgf/noncoaxial/cylinder50}
+    \end{overprint}
+    \hspace{-.5cm}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Зависимость поля скоростей от \(\tau = T_2-T_1\)}
+    \centering
+    \begin{columns}
+        \column{.7\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{kgf/temper/U-tau-cylinders}
+            \vspace{-.5cm}\caption{максимальное значение скорости}
+        \end{figure}
+        \column{.4\textwidth}
+        \[ u_{i1} = \OO{\tau^3}, \quad \tau\to0, \]
+        \[ u_{i1} = \OO{\tau^{3/2}}, \quad \tau\to\infty. \]
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Зависимость действующей силы от \(\tau = T_2-T_1\)}
+    \vspace{-.2cm}
+    \[ p_0 \oint_S F_{x2}\dd{S} = \OO{\tau^2}. \]
+    \vspace{-.7cm}
+    \begin{columns}
+        \column{.6\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{kgf/temper/F-tau-cylinders-inner}
+            \vspace{-.5cm}\caption{внутренний цилиндр}
+        \end{figure}
+        \column{.6\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{kgf/temper/F-tau-cylinders-outer}
+            \vspace{-.5cm}\caption{внешний цилиндр}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Зависимость действующей силы от расстояния между осями}
+    \vspace{-.5cm}
+    \[ p_0 \oint_S F_{x2}\dd{S} = \begin{cases}
+        \OO{(1-d)^{-1}} & \quad\text{для cфер}, \\
+        \OO{(1-d)^{-3/2}} & \quad\text{для цилиндров}, \\
+        \end{cases} \quad d\to1. \]
+    \vspace{-.7cm}
+    \begin{columns}
+        \column{.6\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{kgf/force/forces}
+        \end{figure}
+        \column{.6\textwidth}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{kgf/force/forces-close}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+
+\section{Течение между эллиптическими цилиндрами}
+
+\begin{frame}
+    \frametitle{Слой Кнудсена второго порядка}
+    \footnotesize
+    \begin{equation*}
+        \begin{aligned}
+            \frac1{\sqrt{T_{B0}}}&
+                \begin{bmatrix} (u_{j2} - u_{Bj2}) \\ u_{jK2} \end{bmatrix}\deltann{i}{j} = \\
+            &- \left.\frac{\sqrt{T_{B0}}}{p_0}\onwall{\pder[u_{j1}]{x_k}} \deltann{i}{j}n_k
+                \begin{bmatrix} k_0 \\ Y_0(\eta) \end{bmatrix} \quad\right\}\text{velocity jump}\\
+            &- \left.\frac{T_{B0}}{p_0}\onwall{\pderder[T_0]{x_j}{x_k}} \deltann{i}{j}n_k
+                \begin{bmatrix} a_4 \\ Y_{a4}(\eta) \end{bmatrix} \quad\right\}\text{thermal slip} \\
+            &\left.\begin{aligned}
+                &- \bar\kappa\frac{T_{B0}}{p_0}\onwall{\pder[T_0]{x_j}} \deltann{i}{j}
+                \begin{bmatrix} a_5 \\ Y_{a5}(\eta) \end{bmatrix} \\
+                &- \kappa_{jk}\frac{T_{B0}}{p_0}\onwall{\pder[T_0]{x_k}} \deltann{i}{j}
+                \begin{bmatrix} a_6 \\ Y_{a6}(\eta) \end{bmatrix}
+            \end{aligned} \quad\right\}\text{curvature terms}\\
+            &- \left.\pder[T_{B1}]{x_j} \deltann{i}{j}
+                \begin{bmatrix} K_1 \\ \frac12 Y_1(\eta) \end{bmatrix}. \quad\right\}\text{thermal creep}
+        \end{aligned}\label{eq:boundary_u2t}
+    \end{equation*}
+    \vspace{-10pt}
+    \begin{itemize}
+        \item \(\kappa_{ij} = \kappa_1 l_i l_j + \kappa_2 m_i m_j\) is the curvature tensor, \(\bar\kappa = (\kappa_1+\kappa_2)/2\)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Слой Кнудсена второго порядка}
+    \footnotesize
+    \begin{gather*}
+        \begin{multlined}
+            \frac1{\sqrt{T_{B0}}}
+                \begin{bmatrix} (u_{j2} - u_{Bj2}) \\ u_{jK2} \end{bmatrix} n_j = \\
+            - \frac{T_{B0}}{p_0}\left[ \onwall{\pderder[T_0]{x_i}{x_j}}n_i n_j
+                + 2\bar\kappa\onwall{\pder[T_0]{x_i}}n_i \right]
+                \begin{bmatrix} \frac12\int_0^\infty Y_1(\eta_0)\dd\eta_0 \\
+                    \frac12\int_\infty^{\eta} Y_1(\eta_0)\dd\eta_0 \end{bmatrix}.
+        \end{multlined}\label{eq:boundary_u2n}\\
+        \begin{aligned}
+            \frac{p_0}{T_{B0}}
+                \begin{bmatrix} T_2 - T_{B2} \\ T_{K2} \\ T_{B0}^2\rho_{K2} \end{bmatrix}
+            &= \onwall{\pder[T_1]{x_j}} n_j
+                \begin{bmatrix} d_1 \\ \Theta_1(\eta) \\ p_0\Omega_1(\eta) \end{bmatrix} \\
+            &+ \frac{T_{B0}}{p_0}\onwall{\pderder[T_0]{x_i}{x_j}} n_i n_j
+                \begin{bmatrix} d_3 \\ \Theta_3(\eta) \\ p_0\Omega_3(\eta) \end{bmatrix} \\
+            &+ \bar\kappa\frac{T_{B0}}{p_0}\onwall{\pder[T_0]{x_i}} n_i
+                \begin{bmatrix} d_5 \\ \Theta_5(\eta) \\ p_0\Omega_5(\eta) \end{bmatrix}.
+        \end{aligned}\label{eq:boundary_T2}
+    \end{gather*}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Поле скоростей при \(\Kn=0.02\)}
+    \begin{figure}
+        \hspace{-.5cm}
+        \begin{overprint}
+            \onslide<1| handout:3>
+                \includegraphics[width=\linewidth]{{{snit/elliptic/kgf-0.02-flow}}}
+                \vspace{-20pt}
+                \caption{уравнения КГФ с граничными условиями ведущего порядка}
+            \onslide<2| handout:2>
+                \includegraphics[width=\linewidth]{{{snit/elliptic/first-0.02-flow}}}
+                \vspace{-20pt}
+                \caption{уравнения КГФ с граничными условиями первого порядка}
+            \onslide<3| handout:1>
+                \includegraphics[width=\linewidth]{{{snit/elliptic/curv-0.02-flow}}}
+                \vspace{-20pt}
+                \caption{уравнения КГФ с граничными условиями второго порядка}
+            \onslide<4| handout:0>
+                \includegraphics[width=\linewidth]{{{snit/elliptic/kes-0.02-flow}}}
+                \vspace{-20pt}
+                \caption{численное решение уравнения Больцмана}
+        \end{overprint}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Заключение}
+    \textbf{Основные положения, выносимые на защиту:}
+    \begin{enumerate}
+        \item\label{defpos:stencils}
+        Критерии положительности для многоточечных проекционных шаблонов.
+        \item\label{defpos:transport_coeffs}
+        Транспортные коэффициенты для газа твёрдых сфер.
+        \item\label{defpos:Couette_flow}
+        Решение нелинейной плоской задачи Куэтта в широком диапазоне \(\Kn\) и \(\Ma\).
+        \item\label{defpos:asymptotic_verification}
+        Разница между асимптотическим и кинетическим решениями не более \(10^{-4}\).
+        \item\label{defpos:boundary_conditions}
+        Граничные условия первого и второго порядка для уравнений КГФ.
+        \item\label{defpos:snit_forces}
+        Электростатическая аналогия при обтекании равномерно нагретых тел.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Публикации с соавторами}
+    \begin{itemize}
+        \item \textit{Computing of gas flows in micro- and nanoscale channels on the base of the Boltzmann kinetic equation}
+        / Yu. A. Anikin, E. P. Derbakova, O. I. Dodulad, Yu. Yu. Kloss, D. V. Martynov,
+            \textbf{O. A. Rogozin}, P. V. Shuvalov, F. G. Tcheremissine. \\
+        \alert{Procedia Comput. Sci.} 1.1 (2010), 735--744.
+        \item \textit{Проблемно-моделирующая среда для расчётов и анализа газокинетических процессов}
+        / О. И. Додулад, Ю. Ю. Клосс, Д. В. Мартынов,
+            \textbf{О. А. Рогозин}, В. В. Рябченков, П. В. Шувалов, Ф. Г. Черемисин. \\
+        \alert{Нано- и микросистемная техника} 2 (2011), 12--17.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Основные публикации}
+    \begin{itemize}
+        \item \textit{Computer simulation of slightly rarefied gas flows driven
+            by significant temperature variations and their continuum limit.} \\
+        \alert{Theor. Comput. Fluid Dyn.} 28.6 (2014), 573--587.
+        \item \textit{Numerical analysis of the nonlinear plane Couette-flow problem of a rarefied gas for hard-sphere molecules.} \\
+        \alert{Eur. J. Mech. B/Fluids} 60 (2016), 148--163.
+        \item \textit{Медленные неизотермические течения: численный и асимптотический анализ уравнения Больцмана.} \\
+        \alert{Ж. вычисл. матем. и матем. физ.} 57.7 (2017), 1205--1229.
+    \end{itemize}
+\end{frame}
+
 
 \end{document}
